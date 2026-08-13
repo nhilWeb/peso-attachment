@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PESO San Miguel Attachment System</title>
+<link rel="icon" type="image/x-icon" href="PESO-Logo.ico">
+<link rel="preload" as="image" href="Bagong_Pilipinas_logo.png">
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css">
+</head>
+<body class="bg-slate-100 text-slate-900">
+<header class="app-header no-print">
+  <div class="app-header-inner max-w-7xl mx-auto px-5 py-4 flex flex-wrap gap-3 items-center justify-between">
+    <div class="app-brand flex items-center gap-3">
+      <div class="app-logo-shell"><img id="appHeaderLogo" alt="Public Employment Service Office logo" class="shrink-0 rounded-full object-contain" width="58" height="58" style="display:block;object-fit:contain"></div>
+      <div class="app-brand-copy">
+        <div class="app-brand-kicker">LGU San Miguel · PESO</div>
+        <div class="app-title">Attachment Management System</div>
+        <div class="app-subtitle">Public Employment Service Office</div>
+      </div>
+    </div>
+    <nav class="app-nav" aria-label="Primary navigation">
+      <button class="navBtn app-nav-btn active" data-view="dashboard" title="Dashboard" aria-label="Dashboard" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg></button>
+      <button class="navBtn app-nav-btn" data-view="settings" title="Settings" aria-label="Settings"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.52-1.03H3v-4h.08A1.7 1.7 0 0 0 4.6 8.94a1.7 1.7 0 0 0-.34-1.88L4.2 7l2.83-2.83.06.06A1.7 1.7 0 0 0 8.97 4.6 1.7 1.7 0 0 0 10 3.08V3h4v.08a1.7 1.7 0 0 0 1.03 1.52 1.7 1.7 0 0 0 1.88-.34l.06-.06L19.8 7l-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"></path></svg></button>
+    </nav>
+  </div>
+</header>
+
+<div id="apiStatus" class="api-status no-print" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<main class="max-w-7xl mx-auto p-5">
+  <section id="dashboardView" class="appView">
+    <div class="dashboard-hero">
+      <div>
+        <div class="dashboard-eyebrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"></path></svg>Dashboard Overview</div>
+        <h1>Manage attachments with confidence.</h1>
+        <p>Encode each transaction once, review its details, and prepare all required PESO financial attachments from one organized workspace.</p>
+      </div>
+      <div class="dashboard-hero-actions">
+        <div class="dashboard-date-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg><span id="dashboardDate"></span></div>
+        <button id="dashNew" class="dashboard-new-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New Transaction</button>
+      </div>
+    </div>
+
+    <div class="dashboard-stats">
+      <div class="dashboard-stat stat-blue">
+        <div class="dashboard-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M8 13h8M8 17h6"></path></svg></div>
+        <div><div class="dashboard-stat-label">Transactions</div><div id="txCount" class="dashboard-stat-value">0</div><div class="dashboard-stat-note">Saved records</div></div>
+      </div>
+      <div class="dashboard-stat stat-slate">
+        <div class="dashboard-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h6M9 13h6M9 17h6"></path></svg></div>
+        <div><div class="dashboard-stat-label">Current Module</div><div class="dashboard-stat-value">MOOE Expenses</div><div class="dashboard-stat-note">Financial attachments</div></div>
+      </div>
+      <div class="dashboard-stat stat-green">
+        <div class="dashboard-stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"></path><path d="M16 2v5h5M9 13h6M9 17h6"></path></svg></div>
+        <div><div class="dashboard-stat-label">Attachments</div><div class="dashboard-stat-value">4 Templates</div><div class="dashboard-stat-note">OR, DV, TO &amp; Itinerary</div></div>
+      </div>
+    </div>
+
+    <div class="transactions-card">
+      <div class="transactions-header">
+        <div class="transactions-title-wrap">
+          <div class="transactions-title-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path><path d="M2 6h.01M2 12h.01M2 18h.01"></path></svg></div>
+          <div><div class="transactions-title">Saved Transactions</div><div class="transactions-subtitle">Review, edit, export, or remove a transaction.</div></div>
+        </div>
+      </div>
+      <div class="dashboard-table-scroll">
+        <table class="dashboard-table">
+          <colgroup>
+            <col class="dashboard-col-transaction"><col class="dashboard-col-travel"><col class="dashboard-col-purpose"><col class="dashboard-col-amount"><col class="dashboard-col-actions">
+          </colgroup>
+          <thead>
+            <tr><th>Transaction</th><th>Travel Details</th><th>Purpose of Travel</th><th class="text-right">Amount</th><th class="dashboard-action-heading">Actions</th></tr>
+          </thead>
+          <tbody id="txRows"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="dashboard-empty">
+        <div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M9 15h6M12 12v6"></path></svg></div>
+        <div class="dashboard-empty-title">No transactions yet</div>
+        <div class="dashboard-empty-text">Create your first transaction to begin preparing attachments.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formView" class="appView hidden">
+    <div class="transaction-shell">
+      <form id="txForm" class="transaction-form">
+        <div class="transaction-hero">
+          <div class="transaction-hero-main">
+            <div class="transaction-hero-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M12 18v-6M9 15h6"></path></svg></div>
+            <div><div class="transaction-eyebrow">Transaction Workspace</div><h1 id="formTitle">New Travel Expenses Transaction</h1><p>Complete the information below once and reuse it across every required financial attachment.</p></div>
+          </div>
+          <div class="transaction-hero-actions">
+            <div class="transaction-template-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"></path><path d="M16 2v5h5"></path></svg>4 Attachments</div>
+            <button type="button" id="backDash" class="transaction-back-btn" title="Back to Dashboard" aria-label="Back to Dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+          </div>
+        </div>
+
+        <div class="transaction-section section-blue">
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4Z"></path><path d="M8 8h8M8 12h8M8 16h5"></path></svg></div><div><div class="transaction-section-title">Transaction Details</div><div class="transaction-section-subtitle">Document numbers, expense category, and transaction date.</div></div></div><div class="transaction-section-step">Step 1</div></div>
+          <div class="transaction-section-body"><div class="transaction-fields cols-4">
+            <label><span class="form-label">Transaction Type</span><select id="type" class="form-input"><option value="Travel Expenses">Travel Expenses</option><option value="Training Expenses">Training Expenses</option><option value="Office Supplies">Office Supplies</option><option value="Accountable Form">Accountable Form</option><option value="Drugs and Medicines">Drugs and Medicines</option><option value="Medical, Dental &amp; Lab">Medical, Dental &amp; Lab</option><option value="Fuel, Oil &amp; Lubricants">Fuel, Oil &amp; Lubricants</option><option value="Agricultural Supplies">Agricultural Supplies</option><option value="Other Supplies &amp; Materials">Other Supplies &amp; Materials</option><option value="Water Expenses">Water Expenses</option></select></label>
+            <label><span class="form-label">OR No.</span><input id="orNo" class="form-input" placeholder="2026-08-001"></label>
+            <label><span class="form-label">DV No.</span><input id="dvNo" class="form-input"></label>
+            <label><span class="form-label">Transaction Date</span><input id="transactionDate" type="date" class="form-input"></label>
+          </div></div>
+        </div>
+
+        <div class="transaction-section section-slate">
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></div><div><div class="transaction-section-title">Employee / Payee</div><div class="transaction-section-subtitle">Personal, office, and official-station information.</div></div></div><div class="transaction-section-step">Step 2</div></div>
+          <div class="transaction-section-body"><div class="transaction-fields cols-2">
+            <label><span class="form-label">Name</span><input id="payee" class="form-input" value="JHONNA MAY A. PARONDA"></label>
+            <label><span class="form-label">Position</span><input id="position" class="form-input" value="PESO Manager"></label>
+            <label><span class="form-label">Office</span><input id="office" class="form-input" value="PESO"></label>
+            <label><span class="form-label">Address</span><input id="address" class="form-input" value="Tina, San Miguel, Surigao del Sur"></label>
+            <label><span class="form-label">Official Station</span><input id="officialStation" class="form-input" value="LGU - San Miguel"></label>
+            <label><span class="form-label">Salary</span><input id="salary" class="form-input"></label>
+          </div></div>
+        </div>
+
+        <div class="transaction-section section-green">
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M6 17l2-5h8l2 5M12 12V3M9 6l3-3 3 3"></path></svg></div><div><div class="transaction-section-title">Travel Information</div><div class="transaction-section-subtitle">Travel period, destination, purpose, and voucher explanation.</div></div></div><div class="transaction-section-step">Step 3</div></div>
+          <div class="transaction-section-body"><div class="transaction-fields cols-2">
+            <label><span class="form-label">Travel From</span><span class="date-picker-row"><input id="travelFrom" type="text" readonly class="form-input calendar-date-input travel-date-control" data-date-field="travelFrom" placeholder="Select date"><button type="button" class="travel-date-control date-picker-btn" data-date-field="travelFrom" aria-label="Open Travel From calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></button></span></label>
+            <label><span class="form-label">Travel To / Return</span><span class="date-picker-row"><input id="travelTo" type="text" readonly class="form-input calendar-date-input travel-date-control" data-date-field="travelTo" placeholder="Select date"><button type="button" class="travel-date-control date-picker-btn" data-date-field="travelTo" aria-label="Open Travel To calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></button></span></label>
+            <label><span class="form-label">Destination</span><input id="destination" class="form-input" value="DAVAO CITY"></label>
+            <label><span class="form-label">Date Return</span><span class="date-picker-row"><input id="dateReturn" type="text" readonly class="form-input calendar-date-input travel-date-control" data-date-field="dateReturn" placeholder="Select date"><button type="button" class="travel-date-control date-picker-btn" data-date-field="dateReturn" aria-label="Open Date Return calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></button></span></label>
+            <label class="transaction-span-2"><span class="form-label">Purpose of Travel</span><textarea id="purpose" rows="3" class="form-input">To attend the Training of Trainers on Ordinance Codification for the Strengthening of Local Legislative Systems in Support of Full Devolution.</textarea></label>
+            <label class="transaction-span-2"><span class="form-label">DV Explanation</span><textarea id="explanation" rows="2" class="form-input">To Reimburse of Travel Expenses as per supporting papers is hereto attached in the amount of</textarea></label>
+          </div></div>
+        </div>
+
+        <div class="transaction-section section-indigo">
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7 7h4v4H7ZM13 7h4M13 11h4M7 14h4M7 17h4M13 14h4v3h-4Z"></path></svg></div><div><div class="transaction-section-title">Accounting</div><div class="transaction-section-subtitle">Responsibility center, funding source, and account classification.</div></div></div><div class="transaction-section-step">Step 4</div></div>
+          <div class="transaction-section-body"><div class="transaction-fields cols-4">
+            <label><span class="form-label">Responsibility Center Code</span><input id="responsibilityCenter" class="form-input" value="1011"></label>
+            <label><span class="form-label">Responsibility Center Name</span><input id="responsibilityCenterName" class="form-input" value="PESO"></label>
+            <label><span class="form-label">F.F.P</span><input id="ffp" class="form-input" value="MOOE"></label>
+            <label><span class="form-label">Account Code</span><input id="accountCode" class="form-input" value="5-02-01-010"></label>
+            <label class="transaction-span-2"><span class="form-label">OR Particulars</span><input id="particulars" class="form-input" value="TRAVEL EXPENSES"></label>
+          </div></div>
+        </div>
+
+        <div class="transaction-section section-sky">
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg></div><div><div class="transaction-section-title">Itinerary</div><div class="transaction-section-subtitle">The calculated itinerary total becomes the OR and DV amount automatically.</div></div></div><button type="button" id="addItinerary" class="itinerary-add-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Row</button></div>
+          <div class="transaction-section-body">
+            <div class="itinerary-table-wrap"><table class="itinerary-table"><thead><tr><th>Date</th><th>From</th><th>To</th><th>Depart</th><th>Arrival</th><th>Means</th><th>Transport</th><th>Per Diem</th><th>Others</th><th aria-label="Remove row"></th></tr></thead><tbody id="itinRows"></tbody></table></div>
+            <div class="itinerary-summary"><div class="itinerary-total"><span class="itinerary-total-label">Calculated Total</span><strong class="itinerary-total-value">₱<span id="totalAmount">0.00</span></strong></div></div>
+          </div>
+        </div>
+
+        <div class="transaction-actions-bar">
+          <div class="transaction-actions-note"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>Review the details before saving. You can preview all templates first.</div>
+          <div class="transaction-actions">
+            <button type="button" id="previewWithoutSave" class="transaction-preview-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>Preview</button>
+            <button class="transaction-save-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>Save Transaction</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="previewView" class="appView hidden">
+    <div class="preview-shell">
+      <div class="preview-hero no-print">
+        <div class="preview-hero-main">
+          <div class="preview-hero-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg></div>
+          <div><div class="preview-eyebrow">Document Workspace</div><h1>Attachment Preview</h1><p>Review every completed template, switch between forms, and print or save the selected attachment as PDF.</p></div>
+        </div>
+        <div class="preview-record">
+          <div class="preview-record-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg></div>
+          <div style="min-width:0"><div class="preview-record-label-row"><div class="preview-record-label">Prepared for</div><span id="previewStatusBadge" class="preview-status-badge draft">Draft</span></div><div id="previewPayee" class="preview-record-name">—</div><div id="previewMeta" class="preview-record-meta">—</div></div>
+        </div>
+      </div>
+
+      <div class="preview-workspace">
+        <aside class="preview-template-sidebar no-print" aria-label="Attachment template selector">
+          <div class="preview-template-wrap">
+            <div class="preview-template-label"><strong>Select Template</strong><span>4 available forms</span></div>
+            <div class="template-status-legend" aria-hidden="true"><span class="incomplete"><b>×</b> Incomplete</span><span class="complete"><b>✓</b> Complete</span></div>
+            <div class="preview-tabs" role="tablist" aria-label="Attachment templates">
+              <div class="preview-template-item">
+                <button class="tplBtn preview-tab active" data-tpl="or" role="tab" aria-selected="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"></path><path d="M16 2v5h5M9 13h6M9 17h4"></path></svg>Obligation Request</button>
+                <div class="template-markers"><button type="button" class="template-mark-btn incomplete" data-tpl="or" data-mark="incomplete" title="Mark Obligation Request incomplete" aria-label="Mark Obligation Request incomplete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><button type="button" class="template-mark-btn complete" data-tpl="or" data-mark="complete" title="Mark Obligation Request complete" aria-label="Mark Obligation Request complete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></button></div>
+              </div>
+              <div class="preview-template-item">
+                <button class="tplBtn preview-tab" data-tpl="dv" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h2"></path></svg>Disbursement Voucher</button>
+                <div class="template-markers"><button type="button" class="template-mark-btn incomplete" data-tpl="dv" data-mark="incomplete" title="Mark Disbursement Voucher incomplete" aria-label="Mark Disbursement Voucher incomplete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><button type="button" class="template-mark-btn complete" data-tpl="dv" data-mark="complete" title="Mark Disbursement Voucher complete" aria-label="Mark Disbursement Voucher complete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></button></div>
+              </div>
+              <div class="preview-template-item">
+                <button class="tplBtn preview-tab" data-tpl="to" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2 9 15M22 2l-6 20-4-9-9-4Z"></path></svg>Travel Order</button>
+                <div class="template-markers"><button type="button" class="template-mark-btn incomplete" data-tpl="to" data-mark="incomplete" title="Mark Travel Order incomplete" aria-label="Mark Travel Order incomplete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><button type="button" class="template-mark-btn complete" data-tpl="to" data-mark="complete" title="Mark Travel Order complete" aria-label="Mark Travel Order complete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></button></div>
+              </div>
+              <div class="preview-template-item">
+                <button class="tplBtn preview-tab" data-tpl="itinerary" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg>Itinerary</button>
+                <div class="template-markers"><button type="button" class="template-mark-btn incomplete" data-tpl="itinerary" data-mark="incomplete" title="Mark Itinerary incomplete" aria-label="Mark Itinerary incomplete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><button type="button" class="template-mark-btn complete" data-tpl="itinerary" data-mark="complete" title="Mark Itinerary complete" aria-label="Mark Itinerary complete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></button></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="preview-status-section">
+            <div class="preview-toolbar-copy"><strong>Automatic Status</strong><span>All four templates must be checked to mark this transaction Done.</span></div>
+            <div class="preview-auto-status"><span id="previewAutoStatus" class="preview-auto-status-badge draft">Draft</span><span id="previewCompletionCount">0 of 4 complete</span></div>
+            <div id="previewStatusNote" class="preview-status-note">Template marks are saved automatically.</div>
+          </div>
+
+          <div class="preview-sidebar-actions">
+            <div class="preview-toolbar-copy"><strong>Document Actions</strong><span>Edit the information or create a printable copy.</span></div>
+            <div class="preview-logo-toggle-row">
+              <div><strong>Template Logos</strong><span id="templateLogosStatus">Enabled</span></div>
+              <button type="button" id="templateLogosToggle" class="preview-logo-toggle active" role="switch" aria-checked="true" aria-label="Show template logos"><span></span></button>
+            </div>
+            <div class="preview-actions">
+              <button id="editCurrent" class="preview-edit-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path></svg>Edit Details</button>
+              <button id="printBtn" class="preview-print-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6Z"></path></svg>Print / Save PDF</button>
+            </div>
+          </div>
+        </aside>
+
+        <div class="preview-main">
+          <div class="preview-stage">
+            <div class="preview-stage-header no-print">
+              <div class="preview-stage-title-wrap"><div class="preview-stage-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8l4 4v14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z"></path><path d="M16 2v5h5"></path></svg></div><div><div class="preview-stage-label">Current Document</div><div id="previewTemplateTitle" class="preview-stage-title">Obligation Request</div></div></div>
+              <div class="preview-ready">Ready to print</div>
+            </div>
+            <div class="preview-document-scroll"><div id="printArea"></div></div>
+            <button type="button" id="nextTemplateBtn" class="preview-next-btn no-print" title="Next template" aria-label="Proceed to the next template"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="settingsView" class="appView hidden">
+    <div class="settings-shell">
+      <div class="settings-hero">
+        <div class="settings-hero-main">
+          <div class="settings-hero-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.52-1.03H3v-4h.08A1.7 1.7 0 0 0 4.6 8.94a1.7 1.7 0 0 0-.34-1.88L4.2 7l2.83-2.83.06.06A1.7 1.7 0 0 0 8.97 4.6 1.7 1.7 0 0 0 10 3.08V3h4v.08a1.7 1.7 0 0 0 1.03 1.52 1.7 1.7 0 0 0 1.88-.34l.06-.06L19.8 7l-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"></path></svg></div>
+          <div><div class="settings-eyebrow">System Settings</div><h1>Document Signatories</h1><p>Manage the authorized officials whose names and positions appear automatically across generated financial attachments.</p></div>
+        </div>
+        <div class="settings-local-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>Saved to Google Sheets</div>
+      </div>
+
+      <form id="settingsForm" class="settings-panel">
+        <div class="settings-panel-header">
+          <div class="settings-panel-title-wrap">
+            <div class="settings-panel-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+            <div><div class="settings-panel-title">Official Signatories</div><div class="settings-panel-subtitle">These details are reused in every applicable template.</div></div>
+          </div>
+          <div class="settings-count-badge">4 Officials</div>
+        </div>
+
+        <div class="settings-grid">
+          <div class="signatory-card official-blue">
+            <div class="signatory-card-header"><div class="signatory-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h6M9 14h6M9 18h6"></path></svg></div><div><div class="signatory-office">Office of the Mayor</div><div class="signatory-title">Municipal Mayor</div></div></div>
+            <div class="signatory-fields">
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Full Name</span><input id="mayorName" class="settings-input"></label>
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"></path></svg>Official Position</span><input id="mayorPos" class="settings-input"></label>
+            </div>
+          </div>
+
+          <div class="signatory-card official-slate">
+            <div class="signatory-card-header"><div class="signatory-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14"></path><path d="M2 19h20M8 7h8M8 11h8M8 15h5"></path></svg></div><div><div class="signatory-office">Accounting Office</div><div class="signatory-title">Municipal Accountant</div></div></div>
+            <div class="signatory-fields">
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Full Name</span><input id="accountantName" class="settings-input"></label>
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"></path></svg>Official Position</span><input id="accountantPos" class="settings-input"></label>
+            </div>
+          </div>
+
+          <div class="signatory-card official-green">
+            <div class="signatory-card-header"><div class="signatory-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 10h18M8 15h2"></path></svg></div><div><div class="signatory-office">Treasury Office</div><div class="signatory-title">Municipal Treasurer</div></div></div>
+            <div class="signatory-fields">
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Full Name</span><input id="treasurerName" class="settings-input"></label>
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"></path></svg>Official Position</span><input id="treasurerPos" class="settings-input"></label>
+            </div>
+          </div>
+
+          <div class="signatory-card official-indigo">
+            <div class="signatory-card-header"><div class="signatory-avatar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4Z"></path><path d="M8 15v-3M12 15V8M16 15v-5"></path></svg></div><div><div class="signatory-office">Budget Office</div><div class="signatory-title">Municipal Budget Officer</div></div></div>
+            <div class="signatory-fields">
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>Full Name</span><input id="budgetName" class="settings-input"></label>
+              <label class="settings-field"><span class="settings-field-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"></path></svg>Official Position</span><input id="budgetPos" class="settings-input"></label>
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <div class="settings-help"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 8h.01"></path></svg>Changes apply to newly generated and exported attachments.</div>
+          <div class="settings-save-wrap">
+            <div id="settingsSaveStatus" class="settings-save-status" role="status" aria-live="polite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>Settings saved</div>
+            <button class="settings-save-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>Save Settings</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div id="calendarModal" class="calendar-modal no-print" aria-hidden="true">
+  <div class="calendar-card" role="dialog" aria-modal="true" aria-labelledby="calendarTitle">
+    <div class="p-4 border-b flex items-center justify-between gap-3">
+      <button type="button" id="calendarPrev" class="btn bg-slate-100" aria-label="Previous month">‹</button>
+      <div class="text-center">
+        <div id="calendarTitle" class="font-bold"></div>
+        <div id="calendarHint" class="text-xs text-slate-500 mt-1">Select the first day, then the last day.</div>
+      </div>
+      <button type="button" id="calendarNext" class="btn bg-slate-100" aria-label="Next month">›</button>
+    </div>
+    <div class="p-4">
+      <div class="calendar-grid text-center text-xs font-bold text-slate-500 mb-2">
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+      </div>
+      <div id="calendarDays" class="calendar-grid"></div>
+      <div class="mt-4 rounded-lg bg-slate-50 p-3">
+        <div class="text-xs text-slate-500">Selected date</div>
+        <div id="calendarSelection" class="font-bold mt-1">—</div>
+      </div>
+      <div class="mt-4 flex justify-end gap-2">
+        <button type="button" id="calendarCancel" class="btn bg-slate-200">Cancel</button>
+        <button type="button" id="calendarClear" class="btn bg-slate-200">Clear</button>
+        <button type="button" id="calendarApply" class="btn bg-slate-900 text-white">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="confirmationModal" class="confirmation-modal no-print" aria-hidden="true">
+  <div class="confirmation-card" role="dialog" aria-modal="true" aria-labelledby="confirmationTitle" aria-describedby="confirmationMessage">
+    <div class="confirmation-body">
+      <div class="flex items-start gap-4">
+        <div id="confirmationIcon" class="confirmation-icon save" aria-hidden="true">?</div>
+        <div class="grow">
+          <h2 id="confirmationTitle" class="text-lg font-bold">Confirm action</h2>
+          <p id="confirmationMessage" class="text-sm text-slate-500 mt-1"></p>
+        </div>
+      </div>
+      <div id="confirmationDetails" class="confirmation-details"></div>
+    </div>
+    <div class="confirmation-actions">
+      <button type="button" id="confirmationCancel" class="btn bg-slate-200">Cancel</button>
+      <button type="button" id="confirmationConfirm" class="btn confirmation-confirm save">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="config.js?v=20260813-1"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20260813-1"></script>
+</body>
+</html>

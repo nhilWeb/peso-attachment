@@ -1,0 +1,19 @@
+name = "peso-attachment-api"
+main = "src/index.js"
+compatibility_date = "2026-08-13"
+
+# Non-secret values. ALLOWED_ORIGIN may contain a comma-separated list.
+[vars]
+ALLOWED_ORIGIN = "https://attachments.example.gov.ph"
+ACCESS_TEAM_DOMAIN = "your-team.cloudflareaccess.com"
+ACCESS_AUD = "replace-with-cloudflare-access-application-aud"
+
+# Configure these encrypted values before deployment:
+#   npx wrangler secret put APPS_SCRIPT_URL
+#   npx wrangler secret put GATEWAY_SECRET
+#
+# Optional rate limiter. Create a namespace ID and uncomment after configuring it.
+# [[ratelimits]]
+# name = "API_RATE_LIMITER"
+# namespace_id = "1001"
+# simple = { limit = 120, period = 60 }
