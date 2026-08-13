@@ -5,6 +5,6 @@
  * "https://peso-attachments-api.example.workers.dev/api"
  */
 window.PESO_CONFIG = Object.freeze({
-  apiBaseUrl: '/api',
+  apiBaseUrl: 'https://peso-attachment-api.nhildagasdas23.workers.dev/api',
   requestTimeoutMs: 20000
 });
