@@ -123,12 +123,9 @@ async function fetchTransaction(id){
 
 async function loadRemoteState(){
   showApiStatus('Connecting to the transaction database…','info');
-  const [remoteTransactions,remoteSettings]=await Promise.all([
-    apiRequest('/transactions'),
-    apiRequest('/settings')
-  ]);
-  transactions=Array.isArray(remoteTransactions)?remoteTransactions:[];
-  systemSettings=remoteSettings||defaultSettings;
+  const bootstrap=await apiRequest('/bootstrap');
+  transactions=Array.isArray(bootstrap?.transactions)?bootstrap.transactions:[];
+  systemSettings=bootstrap?.settings||defaultSettings;
   remoteReady=true;
   showApiStatus('Google Sheets database connected.','success',2200);
 }
@@ -1339,7 +1336,9 @@ async function restoreViewState(){
   }
 
   if(state.view==='form'&&state.editingId){
-    const transaction=getTxs().find(item=>item.id===state.editingId);
+    const transaction=getTxs().some(item=>item.id===state.editingId)
+      ? await fetchTransaction(state.editingId)
+      : null;
     if(transaction){
       editingId=transaction.id;
       loadTransactionFields(transaction);
