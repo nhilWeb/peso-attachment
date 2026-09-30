@@ -907,7 +907,7 @@ function header(){return `<div style="display:grid;grid-template-columns:16mm au
   <div class="text-center" style="white-space:nowrap">
     <div style="font-size:12pt !important">Republic of the Philippines</div>
     <div style="font-size:12pt !important">Province of Surigao del Sur</div>
-    <div style="font-size:12pt !important">MUNICIPALITY OF SAN MIGUEL</div>
+    <div style="font-size:12pt !important;font-weight:700">MUNICIPALITY OF SAN MIGUEL</div>
   </div>
   <div style="display:flex;align-items:center;justify-content:center;gap:1.5mm">
     <img class="template-logo" src="${PESO_LOGO_URI}" alt="Public Employment Service Office logo" style="display:block;width:14.7mm;height:14.7mm;object-fit:contain">
