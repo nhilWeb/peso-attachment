@@ -34,7 +34,7 @@ const DEFAULT_SETTINGS = {
   treasurer: {name: 'RINZ R. CUADRA', pos: 'Acting Municipal Treasurer'},
   budget: {name: 'LUZVIMINDA G. SAGOSOY', pos: 'Municipal Budget Officer'}
 };
-const BOOTSTRAP_CACHE_KEY = 'peso-bootstrap-v3';
+const BOOTSTRAP_CACHE_KEY = 'peso-bootstrap-v4';
 const BOOTSTRAP_CACHE_SECONDS = 30;
 
 function doPost(e) {
@@ -360,6 +360,7 @@ function rowToTransactionSummary_(row) {
     destination: value('destination'),
     dateReturn: value('dateReturn'),
     purpose: value('purpose'),
+    explanation: value('explanation'),
     totalAmount: Number(value('totalAmount') || 0),
     status: value('status') === 'Done' ? 'Done' : 'Draft',
     updatedAt: value('updatedAt'),
