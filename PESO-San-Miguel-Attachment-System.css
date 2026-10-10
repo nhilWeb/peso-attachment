@@ -24,7 +24,7 @@ body{font-family:Arial,Helvetica,sans-serif}
     #printArea .itinerary-paper{width:190mm!important;height:auto!important;min-height:0!important;overflow:visible!important;break-inside:auto;page-break-inside:auto}
     #printArea .itinerary-paper tr{break-inside:avoid;page-break-inside:avoid}
     @page{size:A4 portrait;margin:.7in 7mm 7mm}
-    @page rer{size:A4 portrait;margin:.7in 1in 7mm}
+    @page rer{size:A4 portrait;margin:15mm 1in}
     #printArea .rer-grid{page:rer;box-sizing:border-box;width:159.2mm!important;max-width:159.2mm!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:1fr}
     #printArea .rer-pair{grid-template-columns:1fr;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
     #printArea .rer-pair:last-child{break-after:auto;page-break-after:auto}
@@ -41,12 +41,13 @@ body{font-family:Arial,Helvetica,sans-serif}
   /* Off-screen A4 pages used for direct PDF downloads (no browser print dialog). */
   #pdfCaptureArea{position:fixed;top:0;left:-10000px;width:210mm;background:#fff;pointer-events:none;z-index:-1}
   #pdfCaptureArea .pdf-capture-document{box-sizing:border-box;width:210mm;min-height:297mm;padding:.7in 7mm 7mm;background:#fff;overflow:visible}
+  #pdfCaptureArea .pdf-capture-document.pdf-capture-rer-page{padding:15mm 25.4mm;overflow:visible}
   #pdfCaptureArea.hide-template-logos .template-logo{visibility:hidden!important}
   #pdfCaptureArea .paper{margin:0 auto!important;box-shadow:none!important;max-width:100%!important}
   #pdfCaptureArea .itinerary-paper{box-sizing:border-box;height:auto;min-height:0;overflow:visible}
   #pdfCaptureArea .itinerary-paper .itinerary-data-row td{line-height:1;overflow-wrap:anywhere;word-break:break-word}
   #pdfCaptureArea .paper,#pdfCaptureArea .paper *,#pdfCaptureArea .doc-table,#pdfCaptureArea .doc-table td,#pdfCaptureArea .doc-table th,#pdfCaptureArea .small,#pdfCaptureArea .xsmall{font-size:12px!important}
-  #pdfCaptureArea .rer-grid{display:grid;grid-template-columns:1fr;gap:4mm;width:190mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
+  #pdfCaptureArea .rer-grid{display:grid;grid-template-columns:1fr;gap:4mm;width:159.2mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
   #pdfCaptureArea .rer-pair{display:grid;grid-template-columns:1fr;gap:4mm;width:100%}
   #pdfCaptureArea .rer-receipt{box-sizing:border-box;width:100%;min-height:106mm;margin:0;border:1.4px solid #111;padding:0 1mm;box-shadow:none;display:flex;flex-direction:column;line-height:1.15}
   #pdfCaptureArea .rer-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0;font-size:13px!important}

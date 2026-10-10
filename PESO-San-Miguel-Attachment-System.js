@@ -567,9 +567,15 @@ async function saveTxPdf(id){
     captureArea.id='pdfCaptureArea';
     captureArea.setAttribute('aria-hidden','true');
     captureArea.classList.toggle('hide-template-logos',!templateLogosEnabled());
-    captureArea.innerHTML=TEMPLATE_KEYS.map(template=>
-      `<section class="pdf-capture-document">${templateRenderers[template](transaction,settings)}</section>`
-    ).join('');
+    const pdfDocuments=TEMPLATE_KEYS.flatMap(template=>{
+      if(template!=='rer')return [`<section class="pdf-capture-document">${templateRenderers[template](transaction,settings)}</section>`];
+      const renderedRer=document.createElement('div');
+      renderedRer.innerHTML=renderRER(transaction,settings);
+      const rerPairs=[...renderedRer.querySelectorAll('.rer-pair')];
+      if(!rerPairs.length)return [`<section class="pdf-capture-document pdf-capture-rer-page">${renderedRer.innerHTML}</section>`];
+      return rerPairs.map(pair=>`<section class="pdf-capture-document pdf-capture-rer-page"><div class="rer-grid">${pair.outerHTML}</div></section>`);
+    });
+    captureArea.innerHTML=pdfDocuments.join('');
     document.body.appendChild(captureArea);
     await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
 
