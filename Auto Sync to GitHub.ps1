@@ -30,7 +30,8 @@ function Sync-GitHub {
   if ($LASTEXITCODE -eq 0) { return }
 
   $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
-  & $gitPath -C $projectPath commit -m "Automatic update $timestamp"
+  $commitType = if ($Once) { 'Manual update' } else { 'Automatic update' }
+  & $gitPath -C $projectPath commit -m "$commitType $timestamp"
   if ($LASTEXITCODE -ne 0) { return }
 
   & $gitPath -C $projectPath pull --rebase origin $branch
