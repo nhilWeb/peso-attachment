@@ -250,9 +250,10 @@ document.querySelectorAll('.dashboard-type-tab').forEach(button=>{
 });
 
 function dashboardTransactionCategory(transaction){
-  const explanation=String(transaction.explanation||'').toLowerCase();
+  const explanation=String(transaction.explanation??transaction.dvExplanation??transaction.dv_explanation??transaction['DV Explanation']??'')
+    .normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
   if(/\bcash[\s-]+advance\b/.test(explanation))return 'cash-advance';
-  if(/\breimburse(?:ment|ments|d|s|ing)?\b/.test(explanation))return 'reimburse';
+  if(/\breimburse|\breimburs(?:ed|es|ing)\b/.test(explanation))return 'reimburse';
   return 'other';
 }
 
