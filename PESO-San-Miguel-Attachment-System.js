@@ -227,6 +227,7 @@ function showView(name){
     b.classList.toggle('active',active);
     if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
   });
+  if(name==='preview')schedulePreviewDocumentFit();
   if(name==='dashboard') renderDashboard();
   saveViewState(name);
 }
@@ -1444,6 +1445,27 @@ function renderRER(t){
   return `<div class="rer-grid">${pairs.map(pair=>`<section class="rer-pair">${pair.map(renderReceipt).join('')}</section>`).join('')}</div>`;
 }
 
+let previewDocumentFitFrame=0;
+function fitPreviewDocument(){
+  const printArea=document.getElementById('printArea');
+  const scroller=document.querySelector('.preview-document-scroll');
+  const page=printArea?.firstElementChild;
+  if(!printArea||!scroller||!page)return;
+  printArea.style.setProperty('--preview-document-zoom','1');
+  if(!window.matchMedia('(max-width: 767px)').matches)return;
+  const styles=getComputedStyle(scroller);
+  const horizontalPadding=parseFloat(styles.paddingLeft||0)+parseFloat(styles.paddingRight||0);
+  const availableWidth=Math.max(1,scroller.clientWidth-horizontalPadding-4);
+  const pageWidth=page.getBoundingClientRect().width;
+  if(!pageWidth)return;
+  printArea.style.setProperty('--preview-document-zoom',String(Math.min(1,availableWidth/pageWidth)));
+}
+function schedulePreviewDocumentFit(){
+  cancelAnimationFrame(previewDocumentFitFrame);
+  previewDocumentFitFrame=requestAnimationFrame(fitPreviewDocument);
+}
+window.addEventListener('resize',schedulePreviewDocumentFit,{passive:true});
+
 function renderPreview(){
   if(!activeTx)return;
   activeTx.templateCompletion=normalizedTemplateCompletion(activeTx);
@@ -1483,6 +1505,7 @@ function renderPreview(){
   nextTemplateButton.disabled=!nextTemplate;
   nextTemplateButton.title=nextTemplate?`Next: ${labels[nextTemplate]}`:'This is the last template';
   nextTemplateButton.setAttribute('aria-label',nextTemplate?`Proceed to ${labels[nextTemplate]}`:'This is the last template');
+  schedulePreviewDocumentFit();
 }
 
 document.querySelectorAll('.tplBtn').forEach(b=>b.onclick=()=>{

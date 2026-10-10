@@ -18,7 +18,7 @@ body{font-family:Arial,Helvetica,sans-serif}
     #printArea,#printArea *{visibility:visible!important}
     html,body{overflow:visible!important;background:#fff!important}
     #previewView,.preview-shell,.preview-workspace,.preview-main,.preview-stage,.preview-document-scroll{position:static!important;overflow:visible!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important}
-    #printArea{position:absolute!important;left:0!important;top:0!important;width:100%!important;margin:0!important;padding:0!important}
+    #printArea{position:absolute!important;left:0!important;top:0!important;width:100%!important;margin:0!important;padding:0!important;zoom:1!important}
     .no-print{display:none!important}.paper{margin:0 auto!important;box-shadow:none!important;max-width:100%!important;break-inside:avoid;page-break-inside:avoid}
     /* The itinerary grows only as far as its entered content requires. */
     #printArea .itinerary-paper{width:190mm!important;height:auto!important;min-height:0!important;overflow:visible!important;break-inside:auto;page-break-inside:auto}
@@ -680,13 +680,18 @@ body{font-family:Arial,Helvetica,sans-serif}
     .preview-tab{min-height:44px;font-size:11px}
     .template-mark-btn{width:34px;height:36px}
     .template-markers{grid-template-columns:repeat(2,34px)}
-    .preview-actions{gap:8px}
+    .preview-template-sidebar .preview-actions{align-items:stretch;flex-direction:row;gap:8px}
+    .preview-template-sidebar .preview-edit-btn,.preview-template-sidebar .preview-print-btn{width:auto;min-width:0;flex:1}
     .preview-edit-btn,.preview-print-btn{min-height:44px;padding:9px 8px;font-size:10px}
     .preview-stage{border-radius:14px}
     .preview-stage-header{align-items:flex-start;padding:11px;gap:8px}
+    .preview-stage-title-wrap{min-width:0}
+    .preview-stage-title{overflow-wrap:anywhere}
     .preview-ready{padding:5px 7px;font-size:8px}
-    .preview-document-scroll{overflow:auto;max-width:100%;padding:10px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
-    .preview-next-btn{right:8px;width:40px;height:40px}
+    .preview-document-scroll{overflow:auto;width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:10px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+    .preview-document-scroll #printArea{zoom:var(--preview-document-zoom,1)}
+    .preview-next-btn{position:static;width:42px;height:42px;margin:10px auto;transform:none}
+    .preview-next-btn:hover:not(:disabled){transform:scale(1.04)}
     .calendar-modal,.confirmation-modal,.note-modal{align-items:flex-end;padding:10px}
     .calendar-card,.confirmation-card,.note-card{max-width:100%;max-height:calc(100dvh - 20px);overflow:auto;border-radius:16px}
     .confirmation-body,.note-modal-body{padding:18px}
