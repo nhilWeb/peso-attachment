@@ -930,22 +930,22 @@ document.querySelectorAll('.travel-date-control').forEach(control=>{
 
 function renderItinerary(){
   document.getElementById('itinRows').innerHTML=itinerary.map((r,i)=>`<tr class="border-t">
-    <td class="p-1">
+    <td class="p-1" data-label="Date">
       <div class="flex items-center gap-1">
         <input readonly class="form-input !p-1 itin date-range-input calendar-date-input" data-i="${i}" data-k="dateRange"
           placeholder="Select date" value="${esc(r.dateRange||'')}">
         <button type="button" class="open-calendar" data-i="${i}" title="Open calendar" aria-label="Open itinerary date calendar"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></button>
       </div>
     </td>
-    <td class="p-1"><input class="form-input !p-1 itin" data-i="${i}" data-k="from" value="${esc(r.from)}"></td>
-    <td class="p-1"><input class="form-input !p-1 itin" data-i="${i}" data-k="to" value="${esc(r.to)}"></td>
-    <td class="p-1"><div class="itinerary-time-control"><input type="time" class="form-input !p-1 itin" data-i="${i}" data-k="departure" value="${esc(r.departure)}"><button type="button" class="clear-itinerary-time${r.departure?' has-time':''}" data-i="${i}" data-k="departure" title="Clear departure time" aria-label="Clear departure time for itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div></td>
-    <td class="p-1"><div class="itinerary-time-control"><input type="time" class="form-input !p-1 itin" data-i="${i}" data-k="arrival" value="${esc(r.arrival)}"><button type="button" class="clear-itinerary-time${r.arrival?' has-time':''}" data-i="${i}" data-k="arrival" title="Clear arrival time" aria-label="Clear arrival time for itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div></td>
-    <td class="p-1"><input class="form-input !p-1 itin" data-i="${i}" data-k="means" value="${esc(r.means)}"></td>
-    <td class="p-1"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="transport" value="${Number(r.transport||0)}"></td>
-    <td class="p-1"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="perDiem" value="${Number(r.perDiem||0)}"></td>
-    <td class="p-1"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="others" value="${Number(r.others||0)}"></td>
-    <td class="p-1"><button type="button" class="itinerary-remove" onclick="removeItin(${i})" title="Remove row" aria-label="Remove itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6"></path></svg></button></td></tr>`).join('');
+    <td class="p-1" data-label="From"><input class="form-input !p-1 itin" data-i="${i}" data-k="from" value="${esc(r.from)}"></td>
+    <td class="p-1" data-label="To"><input class="form-input !p-1 itin" data-i="${i}" data-k="to" value="${esc(r.to)}"></td>
+    <td class="p-1" data-label="Depart"><div class="itinerary-time-control"><input type="time" class="form-input !p-1 itin" data-i="${i}" data-k="departure" value="${esc(r.departure)}"><button type="button" class="clear-itinerary-time${r.departure?' has-time':''}" data-i="${i}" data-k="departure" title="Clear departure time" aria-label="Clear departure time for itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div></td>
+    <td class="p-1" data-label="Arrival"><div class="itinerary-time-control"><input type="time" class="form-input !p-1 itin" data-i="${i}" data-k="arrival" value="${esc(r.arrival)}"><button type="button" class="clear-itinerary-time${r.arrival?' has-time':''}" data-i="${i}" data-k="arrival" title="Clear arrival time" aria-label="Clear arrival time for itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button></div></td>
+    <td class="p-1" data-label="Means"><input class="form-input !p-1 itin" data-i="${i}" data-k="means" value="${esc(r.means)}"></td>
+    <td class="p-1" data-label="Transport"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="transport" value="${Number(r.transport||0)}"></td>
+    <td class="p-1" data-label="Per diem"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="perDiem" value="${Number(r.perDiem||0)}"></td>
+    <td class="p-1" data-label="Others"><input type="number" class="form-input !p-1 itin" data-i="${i}" data-k="others" value="${Number(r.others||0)}"></td>
+    <td class="p-1 itinerary-remove-cell" data-label=""><button type="button" class="itinerary-remove" onclick="removeItin(${i})" title="Remove row" aria-label="Remove itinerary row ${i+1}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M19 6l-1 15H6L5 6M10 11v6M14 11v6"></path></svg></button></td></tr>`).join('');
   document.querySelectorAll('.itin').forEach(el=>el.oninput=e=>{
     const k=e.target.dataset.k,i=+e.target.dataset.i;
     if(k==='dateRange') return;

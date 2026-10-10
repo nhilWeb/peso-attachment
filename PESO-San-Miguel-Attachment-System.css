@@ -558,3 +558,150 @@ body{font-family:Arial,Helvetica,sans-serif}
   #printArea .rer-empty{box-sizing:border-box;width:190mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}
   #printArea .rer-empty p{margin:6mm 0}
   @media screen and (max-width:760px){#printArea .rer-grid{width:100%;grid-template-columns:1fr}#printArea .rer-receipt{width:100%;min-height:0}}
+
+  /* Responsive layout refinements for tablet and mobile screens */
+  html{scroll-padding-top:90px}
+  body{overflow-x:hidden}
+  button,.btn,.form-input,.settings-input{touch-action:manipulation}
+  .app-header-inner,main{width:100%;min-width:0}
+  .app-brand-copy,.dashboard-hero>div,.settings-hero-main>div,.transaction-hero-main>div,.preview-hero-main>div{min-width:0}
+  .dashboard-shell,.settings-shell,.transaction-shell,.preview-shell{min-width:0}
+
+  @media (min-width:768px) and (max-width:1100px){
+    .app-header-inner{gap:16px}
+    .app-brand{flex:1 1 360px}
+    .app-nav{flex:0 0 auto}
+    .dashboard-stats{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .dashboard-stat{gap:11px;padding:16px}
+    .preview-workspace{grid-template-columns:minmax(220px,260px) minmax(0,1fr);gap:12px}
+    .preview-template-sidebar{padding:15px 12px}
+    .preview-document-scroll{padding:18px}
+    .transaction-fields.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  }
+
+  @media screen and (max-width:767px){
+    html{scroll-padding-top:12px}
+    .app-header{position:relative}
+    .app-header-inner{align-items:center;gap:12px;padding:12px 14px}
+    .app-brand{width:auto;flex:1 1 auto;gap:10px}
+    .app-logo-shell{width:48px;height:48px;padding:3px}
+    .app-logo-shell img{width:40px!important;height:40px!important}
+    .app-brand-kicker{font-size:9px;letter-spacing:.1em}
+    .app-title{font-size:clamp(15px,4vw,19px);line-height:1.2;overflow-wrap:anywhere}
+    .app-subtitle{font-size:10px}
+    .app-nav{gap:6px;margin-left:0}
+    .app-nav-btn{width:42px;height:42px}
+    main.p-5{padding:14px}
+    .dashboard-hero,.settings-hero,.transaction-hero,.preview-hero{gap:18px;padding:20px;border-radius:16px}
+    .dashboard-hero h1,.settings-hero h1,.transaction-hero h1,.preview-hero h1{font-size:clamp(21px,6vw,27px);line-height:1.15}
+    .dashboard-hero p,.settings-hero p,.transaction-hero p,.preview-hero p{font-size:13px}
+    .dashboard-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+    .dashboard-stat{min-width:0;min-height:96px;gap:10px;padding:13px}
+    .dashboard-stat-icon{width:38px;height:38px;border-radius:11px}
+    .dashboard-stat-icon svg{width:19px;height:19px}
+    .dashboard-stat-value{font-size:21px}
+    .transactions-card{border-radius:14px}
+    .transactions-header{gap:12px;padding:15px}
+    .transactions-title-wrap{align-items:flex-start}
+    .dashboard-tabs{gap:5px}
+    .dashboard-tab{min-width:0;padding:8px 6px;font-size:10px}
+    .dashboard-table-scroll{padding:10px}
+    .dashboard-table .dashboard-row{grid-template-columns:minmax(0,1fr);gap:0}
+    .dashboard-table .dashboard-row td{padding:10px}
+    .dashboard-table .dashboard-row td[data-label="Purpose of Travel"],
+    .dashboard-table .dashboard-row td[data-label="Note"],
+    .dashboard-table .dashboard-row td[data-label="Actions"]{grid-column:1}
+    .dashboard-table .dashboard-row td[data-label="Amount"]{align-items:center}
+    .dashboard-table .dashboard-cell{max-width:70%}
+    .dashboard-table .dashboard-travel-stack{max-width:72%}
+    .dashboard-actions{width:100%;justify-content:flex-start;gap:7px}
+    .icon-btn{width:40px;height:40px}
+    .settings-panel{border-radius:15px}
+    .settings-panel-header{align-items:flex-start;gap:10px;padding:14px}
+    .settings-panel-title-wrap{min-width:0}
+    .settings-count-badge{flex:0 0 auto}
+    .settings-grid{gap:11px;padding:12px}
+    .signatory-card-header{align-items:flex-start;padding:13px}
+    .signatory-fields{gap:12px;padding:0 13px 14px}
+    .settings-actions{gap:12px;padding:14px}
+    .settings-save-wrap{align-items:stretch;flex-direction:column}
+    .settings-save-btn{width:100%;min-height:44px}
+    .transaction-form{gap:12px}
+    .transaction-hero-main,.preview-hero-main{align-items:flex-start;gap:12px}
+    .transaction-hero-icon,.preview-hero-icon{width:44px;height:44px;flex:0 0 44px}
+    .transaction-hero-actions{width:100%;justify-content:space-between}
+    .transaction-template-pill{min-width:0;max-width:calc(100% - 54px);white-space:normal;overflow-wrap:anywhere}
+    .transaction-section{border-radius:14px}
+    .transaction-section-header{gap:10px;padding:13px}
+    .transaction-section-title{font-size:13px}
+    .transaction-section-subtitle{line-height:1.35}
+    .transaction-section-body{padding:13px}
+    .transaction-fields.cols-4,.transaction-fields.cols-2{grid-template-columns:minmax(0,1fr)}
+    .transaction-span-2{grid-column:auto}
+    .transaction-section .form-input,.settings-input{min-height:44px;font-size:16px}
+    .transaction-section textarea.form-input{min-height:100px}
+    .date-picker-btn{width:44px;flex-basis:44px}
+    .section-sky .transaction-section-header{align-items:flex-start;flex-direction:column}
+    .itinerary-add-btn{min-height:42px}
+    .itinerary-table-wrap{overflow:visible;border:0;border-radius:0}
+    .itinerary-table,.itinerary-table tbody{display:block;width:100%;min-width:0}
+    .itinerary-table thead{display:none}
+    .itinerary-table tbody{display:grid;gap:11px}
+    .itinerary-table tbody tr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 9px;padding:12px;border:1px solid #e2e8f0;border-radius:13px;background:#fff;box-shadow:0 4px 12px rgba(15,23,42,.04)}
+    .itinerary-table tbody tr:hover{background:#fff}
+    .itinerary-table tbody tr td{display:flex;flex-direction:column;justify-content:flex-end;gap:5px;min-width:0;padding:0;border:0}
+    .itinerary-table tbody tr td::before{content:attr(data-label);display:block;color:#64748b;font-size:9px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+    .itinerary-table tbody tr td[data-label="Date"],.itinerary-table tbody tr td[data-label="Means"]{grid-column:1/-1}
+    .itinerary-table tbody tr td.itinerary-remove-cell{grid-column:1/-1;align-items:flex-end}
+    .itinerary-table tbody tr td.itinerary-remove-cell::before{content:none}
+    .itinerary-table .form-input{box-sizing:border-box;width:100%;min-width:0;min-height:43px;padding:8px!important;font-size:16px}
+    .itinerary-table td>div.flex{width:100%;min-width:0}
+    .itinerary-table .open-calendar{width:43px;height:43px;flex:0 0 43px}
+    .itinerary-time-control{width:100%;min-width:0;gap:5px}
+    .itinerary-time-control .form-input{min-width:0}
+    .clear-itinerary-time,.itinerary-remove{width:40px;height:40px;flex-basis:40px}
+    .itinerary-summary{justify-content:stretch}
+    .itinerary-total{width:100%;justify-content:space-between}
+    .transaction-actions-bar{align-items:stretch;flex-direction:column;gap:12px;padding:14px}
+    .transaction-actions-note{align-items:flex-start;line-height:1.4}
+    .transaction-actions{width:100%;gap:8px}
+    .transaction-preview-btn,.transaction-save-btn{min-width:0;min-height:46px;flex:1;padding:10px 8px;font-size:11px}
+    .preview-workspace{grid-template-columns:minmax(0,1fr);gap:12px;margin-top:12px}
+    .preview-template-sidebar{position:static;padding:13px;border-radius:14px}
+    .preview-toolbar{gap:10px}
+    .preview-tabs{scroll-snap-type:x mandatory;padding-bottom:3px}
+    .preview-template-item{flex:0 0 min(250px,82vw);scroll-snap-align:start}
+    .preview-tab{min-height:44px;font-size:11px}
+    .template-mark-btn{width:34px;height:36px}
+    .template-markers{grid-template-columns:repeat(2,34px)}
+    .preview-actions{gap:8px}
+    .preview-edit-btn,.preview-print-btn{min-height:44px;padding:9px 8px;font-size:10px}
+    .preview-stage{border-radius:14px}
+    .preview-stage-header{align-items:flex-start;padding:11px;gap:8px}
+    .preview-ready{padding:5px 7px;font-size:8px}
+    .preview-document-scroll{overflow:auto;max-width:100%;padding:10px;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+    .preview-next-btn{right:8px;width:40px;height:40px}
+    .calendar-modal,.confirmation-modal,.note-modal{align-items:flex-end;padding:10px}
+    .calendar-card,.confirmation-card,.note-card{max-width:100%;max-height:calc(100dvh - 20px);overflow:auto;border-radius:16px}
+    .confirmation-body,.note-modal-body{padding:18px}
+    .confirmation-actions,.note-modal-actions{padding:12px 16px;gap:8px}
+    .confirmation-actions .btn,.note-modal-actions .btn{min-height:44px;flex:1}
+    .note-input-help{flex-direction:column;gap:4px}
+    .api-status{top:10px;max-width:calc(100vw - 24px)}
+  }
+
+  @media screen and (max-width:380px){
+    main.p-5{padding:10px}
+    .app-header-inner{padding:10px}
+    .app-logo-shell{width:42px;height:42px}
+    .app-logo-shell img{width:35px!important;height:35px!important}
+    .app-brand{gap:8px}
+    .app-title{font-size:15px}
+    .app-nav-btn{width:38px;height:38px}
+    .dashboard-stats{grid-template-columns:minmax(0,1fr)}
+    .dashboard-hero,.settings-hero,.transaction-hero,.preview-hero{padding:16px}
+    .dashboard-tabs{flex-wrap:wrap;justify-content:flex-start}
+    .dashboard-tab{flex:1 1 42%}
+    .transaction-section-body{padding:11px}
+    .itinerary-table tbody tr{gap:9px 7px;padding:10px}
+  }
