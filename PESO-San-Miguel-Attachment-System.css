@@ -62,7 +62,7 @@ body{font-family:Arial,Helvetica,sans-serif}
   #pdfCaptureArea .rer-designation{min-height:8mm;padding-bottom:4mm}#pdfCaptureArea .rer-amount{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1mm;position:relative;min-height:11mm;border-bottom:1px solid #111;padding:1mm 0 4mm}
   #pdfCaptureArea .rer-amount b{font-weight:400;text-align:center}#pdfCaptureArea .rer-amount strong{font-weight:400;white-space:nowrap}#pdfCaptureArea .rer-amount i:nth-of-type(1){left:0;right:50%}#pdfCaptureArea .rer-amount i:nth-of-type(2){left:50%;right:0}
   #pdfCaptureArea .rer-payment{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1mm;min-height:9mm;border-bottom:1px solid #111}#pdfCaptureArea .rer-payment b{text-align:center;font-weight:400}
-  #pdfCaptureArea .rer-hint{text-align:center;font-style:italic;border-bottom:1px solid #111;padding:1mm}#pdfCaptureArea .rer-purpose{flex:1;min-height:13mm;padding-top:1mm}#pdfCaptureArea .rer-purpose small{font-size:10px!important}
+  #pdfCaptureArea .rer-hint{text-align:center;font-style:italic;border-bottom:1px solid #111;padding:1mm}#pdfCaptureArea .rer-purpose{flex:1;min-height:13mm;padding:1mm;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4mm}#pdfCaptureArea .rer-purpose small{font-size:10px!important}#pdfCaptureArea .rer-purpose i{position:static;display:block;margin:0;font-size:10px!important}
   #pdfCaptureArea .rer-section-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0}#pdfCaptureArea .rer-sign-line,#pdfCaptureArea .rer-address-line{display:flex;align-items:center;gap:1mm;min-height:7mm}#pdfCaptureArea .rer-sign-line span,#pdfCaptureArea .rer-address-line span{flex:1;border-bottom:1px solid #111}
   #pdfCaptureArea .rer-empty{box-sizing:border-box;width:190mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}#pdfCaptureArea .rer-empty p{margin:6mm 0}
 
@@ -549,8 +549,9 @@ body{font-family:Arial,Helvetica,sans-serif}
   #printArea .rer-payment{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1mm;min-height:9mm;border-bottom:1px solid #111}
   #printArea .rer-payment b{text-align:center;font-weight:400}
   #printArea .rer-hint{text-align:center;font-style:italic;border-bottom:1px solid #111;padding:1mm}
-  #printArea .rer-purpose{flex:1;min-height:13mm;padding-top:1mm}
+  #printArea .rer-purpose{flex:1;min-height:13mm;padding:1mm;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4mm}
   #printArea .rer-purpose small{font-size:10px!important}
+  #printArea .rer-purpose i{position:static;display:block;margin:0;font-size:10px!important}
   #printArea .rer-section-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0}
   #printArea .rer-sign-line,#printArea .rer-address-line{display:flex;align-items:center;gap:1mm;min-height:7mm}
   #printArea .rer-sign-line span,#printArea .rer-address-line span{flex:1;border-bottom:1px solid #111}

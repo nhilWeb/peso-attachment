@@ -1176,8 +1176,8 @@ function renderDV(t,s){
     <td colspan="7" class="text-center" style="padding:0;line-height:1.15">${header()}</td>
   </tr>
 
-  <tr style="height:5.4mm">
-    <td colspan="5" class="text-center font-bold" style="padding:0;font-size:14px !important;line-height:1">DISBURSEMENT VOUCHER</td>
+  <tr style="height:8mm">
+    <td colspan="5" class="text-center font-bold" style="padding:1mm 4px;vertical-align:middle;font-size:14px !important;line-height:1.2">DISBURSEMENT VOUCHER</td>
     <td colspan="2" style="padding:1px 4px;vertical-align:top">No.</td>
   </tr>
 
@@ -1314,7 +1314,7 @@ function renderItin(t,s){
   // Compact rows only as necessary, keeping a normal itinerary on one A4 sheet.
   const rowHeight=Math.max(3.2,Math.min(7,141/Math.max(itineraryRows.length,1)));
   const rowFont=Math.max(7,Math.min(12,rowHeight*2.2));
-  const rowMarkup=r=>{const tot=Number(r.transport||0)+Number(r.perDiem||0)+Number(r.others||0);const place=[r.from,r.to].filter(Boolean).join(' - ');const cellStyle=`font-size:${rowFont}px!important;padding:.5px 2px`;return `<tr class="itinerary-data-row" style="height:${rowHeight}mm"><td class="text-center" style="${cellStyle}">${esc(normalizeDateRange(r.dateRange||''))}</td><td style="${cellStyle};font-weight:${/^STILL IN /i.test(place)?'700':'400'}">${esc(place)}</td><td class="text-center" style="${cellStyle}">${esc(time12(r.departure))}</td><td class="text-center" style="${cellStyle}">${esc(time12(r.arrival))}</td><td class="text-center" style="${cellStyle}">${esc(r.means)}</td><td class="money" style="${cellStyle}">${r.transport?money(r.transport):''}</td><td class="money" style="${cellStyle}">${r.perDiem?money(r.perDiem):''}</td><td class="money" style="${cellStyle}">${r.others?money(r.others):''}</td><td class="money" style="${cellStyle}">${tot?money(tot):''}</td></tr>`};
+  const rowMarkup=r=>{const tot=Number(r.transport||0)+Number(r.perDiem||0)+Number(r.others||0);const place=[r.from,r.to].filter(Boolean).join(' - ');const cellStyle=`font-size:${rowFont}px!important;padding:.5px 2px`;const placeStyle=`font-size:${Math.min(rowFont,6)}px!important;padding:.5px 2px;white-space:nowrap;word-break:normal`;return `<tr class="itinerary-data-row" style="height:${rowHeight}mm"><td class="text-center" style="${cellStyle}">${esc(normalizeDateRange(r.dateRange||''))}</td><td style="${placeStyle};font-weight:${/^STILL IN /i.test(place)?'700':'400'}">${esc(place)}</td><td class="text-center" style="${cellStyle}">${esc(time12(r.departure))}</td><td class="text-center" style="${cellStyle}">${esc(time12(r.arrival))}</td><td class="text-center" style="${cellStyle}">${esc(r.means)}</td><td class="money" style="${cellStyle}">${r.transport?money(r.transport):''}</td><td class="money" style="${cellStyle}">${r.perDiem?money(r.perDiem):''}</td><td class="money" style="${cellStyle}">${r.others?money(r.others):''}</td><td class="money" style="${cellStyle}">${tot?money(tot):''}</td></tr>`};
   const rows=itineraryRows.map(rowMarkup).join('');
   const documentHeader=`
   <div style="height:35mm;padding:1.5mm 1.5mm 0;box-sizing:border-box">
@@ -1432,7 +1432,7 @@ function renderRER(t){
       <div class="rer-amount"><span>of</span><b>${esc(amountInWords(amount))}</b><strong>(₱${money(amount)})</strong><i>(In Words)</i><i>(In Figures)</i></div>
       <div class="rer-payment"><span>in payment for</span><b>${esc([means,route,'FARE'].filter(Boolean).join(' '))}</b></div>
       <div class="rer-hint">(Payments for subsistence, services,<br>rental or transportation should show inclusive dates,</div>
-      <div class="rer-purpose">${esc(t.purpose||'')}<br><small>Travel: ${esc(travelDateRange(t))}</small><i>(purpose, distance, inclusive points of travel, etc.)</i></div>
+      <div class="rer-purpose"><span>${esc(t.purpose||'')}</span><small>Travel: ${esc(travelDateRange(t))}</small><i>(purpose, distance, inclusive points of travel, etc.)</i></div>
       <div class="rer-section-title">PAYEE</div>
       <div class="rer-sign-line">Name/Signature: <span></span></div><div class="rer-address-line">Address: <span></span></div>
       <div class="rer-section-title">WITNESS</div>
