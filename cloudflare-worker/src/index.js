@@ -15,10 +15,10 @@ export default {
 
     try {
       requireConfiguration(env);
-      const user = await authenticateAccess(request, env);
+      const user = await resolveRequestUser(request, env);
 
       if (env.API_RATE_LIMITER) {
-        const limit = await env.API_RATE_LIMITER.limit({key: user.email});
+        const limit = await env.API_RATE_LIMITER.limit({key: user.rateLimitKey || user.email});
         if (!limit.success) return json({ok: false, error: 'Too many requests. Please wait and try again.'}, 429, cors);
       }
 
@@ -28,6 +28,8 @@ export default {
 
       if (request.method === 'GET' && url.pathname === '/api/health') {
         backendRequest = {action: 'health'};
+      } else if (request.method === 'GET' && url.pathname === '/api/bootstrap') {
+        backendRequest = {action: 'getBootstrap'};
       } else if (request.method === 'GET' && url.pathname === '/api/transactions') {
         backendRequest = {action: 'listTransactions'};
       } else if (request.method === 'GET' && transactionMatch) {
@@ -55,8 +57,13 @@ export default {
 };
 
 function requireConfiguration(env) {
-  const required = ['APPS_SCRIPT_URL', 'GATEWAY_SECRET', 'ACCESS_TEAM_DOMAIN', 'ACCESS_AUD', 'ALLOWED_ORIGIN'];
+  const required = ['APPS_SCRIPT_URL', 'GATEWAY_SECRET', 'ALLOWED_ORIGIN'];
+  if (isAccessRequired(env)) required.push('ACCESS_TEAM_DOMAIN', 'ACCESS_AUD');
   if (required.some(key => !env[key])) throw httpError(500, 'Worker configuration is incomplete.');
+}
+
+function isAccessRequired(env) {
+  return String(env.REQUIRE_ACCESS || 'true').trim().toLowerCase() !== 'false';
 }
 
 function originAllowed(origin, env) {
@@ -118,6 +125,15 @@ function backendStatus(message) {
   if (/not found|deleted/i.test(String(message))) return 404;
   if (/unauthorized/i.test(String(message))) return 502;
   return 400;
+}
+
+function resolveRequestUser(request, env) {
+  if (isAccessRequired(env)) return authenticateAccess(request, env);
+
+  return {
+    email: 'public-user',
+    rateLimitKey: request.headers.get('CF-Connecting-IP') || 'public-user'
+  };
 }
 
 async function authenticateAccess(request, env) {

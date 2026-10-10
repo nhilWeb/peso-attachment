@@ -1,0 +1,42 @@
+PESO SAN MIGUEL ATTACHMENT SYSTEM
+Quick User Guide
+
+FILES
+1. PESO-San-Miguel-Attachment-System.html - the complete offline-ready system.
+2. PESO-Logo.ico - the PESO icon used by the browser tab and Desktop shortcut.
+3. Create PESO Desktop Shortcut.bat - creates a PESO-logo shortcut on the Windows Desktop.
+4. USER-GUIDE.txt - this guide.
+
+HOW TO USE OFFLINE
+1. Extract the ZIP file to a permanent folder on the computer.
+2. Double-click PESO-San-Miguel-Attachment-System.html.
+3. If Windows asks which application to use, select Google Chrome or Microsoft Edge.
+4. Use New Transaction to encode the transaction details and itinerary.
+5. Click Save Transaction, review the confirmation summary, then click Save Transaction again in the modal. The saved record appears on the Dashboard.
+6. Open a saved transaction and choose a template: Obligation Request, Disbursement Voucher, Travel Order, Itinerary, or RER Receipts.
+7. RER Receipts creates one receipt for each itinerary row using VAN, PUJ, MULTICAB, TAXI, BAO-BAO, or JEEP. Each receipt uses that row's route and transportation amount, plus the transaction travel period and purpose.
+8. Click Print / Save PDF. In the browser print window, select a printer or Save as PDF.
+
+PESO LOGO ICON
+- The PESO logo appears on the browser tab when the system is open.
+- Windows uses the Chrome or Edge icon for all individual .html files, so the HTML file itself may still show the browser icon in File Explorer.
+- To get a PESO-logo icon on the Desktop, double-click Create PESO Desktop Shortcut.bat once.
+- A shortcut named PESO San Miguel Attachment System will be created on the Desktop.
+- Keep all files together in the same extracted folder. You may use the Desktop shortcut afterward.
+
+IMPORTANT STORAGE INFORMATION
+- Saved transactions and signatory settings are stored in the browser on the current computer.
+- Always use the same browser profile and open the same HTML file from the same folder.
+- Copying only the HTML or ZIP to another computer does not transfer previously saved transactions.
+- Renaming or moving the HTML file may cause the browser to show a separate, empty set of records.
+- Clearing browser site data, using private/incognito mode, resetting the browser, or deleting its profile may remove the saved records.
+- Deleting a transaction in the Dashboard opens a warning modal first. The record is removed from browser storage only after you click Delete Transaction.
+- The current version does not have a transaction backup/export/import feature and does not use a central database.
+
+HOW TO USE ONLINE
+The HTML file can be uploaded to a static web host or ordinary web server and opened through one fixed URL. However, the saved transactions will still be local to each user's browser. Different computers will not see the same transactions.
+
+For shared records, logins, backups, access from multiple computers, and permanent central storage, the system must be upgraded to a server-based web application with a database such as PHP/Laravel and MySQL.
+
+SAFE USE RECOMMENDATION
+Use this version for one designated computer and one normal browser profile. Save final forms as PDF regularly. Do not treat the browser-stored records as the only permanent official copy until a backup/export feature or database version is added.
