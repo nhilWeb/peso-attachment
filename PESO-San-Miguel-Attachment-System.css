@@ -611,15 +611,26 @@ body{font-family:Arial,Helvetica,sans-serif}
     .dashboard-tabs{gap:5px}
     .dashboard-tab{min-width:0;padding:8px 9px;font-size:11px}
     .dashboard-table-scroll{padding:10px}
-    .dashboard-table .dashboard-row{grid-template-columns:minmax(0,1fr);gap:0}
-    .dashboard-table .dashboard-row td{padding:10px;font-size:12px}
-    .dashboard-table .dashboard-row td::before{font-size:9px;letter-spacing:.05em}
+    .dashboard-table .dashboard-row{grid-template-columns:minmax(0,1fr);gap:0;margin-bottom:12px;border-color:#dbe3ee;border-radius:14px;box-shadow:0 5px 16px rgba(15,23,42,.055)}
+    .dashboard-table .dashboard-row td{padding:12px;font-size:12px}
+    .dashboard-table .dashboard-row td::before{font-size:9px;letter-spacing:.06em;line-height:1.25}
+    .dashboard-table .dashboard-row td[data-label="Transaction"]{align-items:center;padding-top:12px;padding-bottom:12px;background:#f8fafc}
+    .dashboard-table .dashboard-transaction-summary{align-items:center;flex-direction:row;flex-wrap:wrap;justify-content:flex-end;gap:6px;max-width:72%}
+    .dashboard-table .dashboard-transaction-summary .transaction-badge,.dashboard-table .dashboard-transaction-summary .dashboard-status{max-width:100%;white-space:normal}
+    .dashboard-table .dashboard-row td[data-label="Travel Details"]{align-items:stretch;flex-direction:column;gap:7px;text-align:left}
+    .dashboard-table .dashboard-travel-stack{width:100%;max-width:none;gap:8px;margin-top:1px}
+    .dashboard-table .dashboard-travel-stack .dashboard-cell{max-width:none;align-items:flex-start;line-height:1.4}
+    .dashboard-table .dashboard-travel-stack .dashboard-cell>span:last-child{min-width:0;overflow-wrap:anywhere}
     .dashboard-table .dashboard-row td[data-label="Purpose of Travel"],
     .dashboard-table .dashboard-row td[data-label="Note"],
     .dashboard-table .dashboard-row td[data-label="Actions"]{grid-column:1}
     .dashboard-table .dashboard-row td[data-label="Amount"]{align-items:center}
-    .dashboard-table .dashboard-cell{max-width:70%}
-    .dashboard-table .dashboard-travel-stack{max-width:72%}
+    .dashboard-table .dashboard-cell{max-width:none}
+    .dashboard-table .dashboard-purpose{line-height:1.5}
+    .dashboard-table .dashboard-note-bubble{width:100%;box-sizing:border-box;padding:10px}
+    .dashboard-table .dashboard-row td[data-label="Amount"]{padding-top:12px;padding-bottom:12px;background:#fbfdff}
+    .dashboard-table .dashboard-amount{font-size:14px}
+    .dashboard-table .dashboard-row td[data-label="Actions"]{padding-top:10px;padding-bottom:12px}
     .dashboard-actions{width:100%;justify-content:flex-start;gap:7px}
     .icon-btn{width:40px;height:40px}
     .settings-panel{border-radius:15px}
