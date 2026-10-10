@@ -5,6 +5,7 @@ $projectPath = Split-Path -Parent $PSCommandPath
 $gitPath = 'C:\Program Files\Git\cmd\git.exe'
 $branch = 'main'
 $pollSeconds = 15
+$logPath = Join-Path $projectPath 'github-auto-sync.log'
 
 if (!(Test-Path -LiteralPath $gitPath)) {
   throw 'Git is not installed. Install Git for Windows, then run this script again.'
@@ -44,6 +45,8 @@ if ($Once) {
 }
 
 while ($true) {
-  try { Sync-GitHub } catch { }
+  try { Sync-GitHub } catch {
+    "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $($_.Exception.Message)" | Add-Content -LiteralPath $logPath
+  }
   Start-Sleep -Seconds $pollSeconds
 }
