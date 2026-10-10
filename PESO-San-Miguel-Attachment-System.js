@@ -5,7 +5,7 @@ const BAGONG_PILIPINAS_LOGO_URI='Bagong_Pilipinas_logo.png';
 const VIEW_STATE_KEY='sm_live_view_state_v1', LOGOS_KEY='sm_template_logos_enabled_v1';
 const APP_VIEWS=['dashboard','form','preview','settings'];
 const TEMPLATE_KEYS=['or','dv','to','itinerary','rer'];
-let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
+let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
 let transactions=[],systemSettings=null,remoteReady=false,apiStatusTimer=null;
 const API_CONFIG=window.PESO_CONFIG||{};
 let itinerary=[
@@ -242,12 +242,27 @@ document.querySelectorAll('.dashboard-tab').forEach(button=>{
     renderDashboard();
   });
 });
+document.querySelectorAll('.dashboard-type-tab').forEach(button=>{
+  button.addEventListener('click',()=>{
+    dashboardTypeTab=button.dataset.dashboardType;
+    renderDashboard();
+  });
+});
+
+function dashboardTransactionCategory(transaction){
+  const explanation=String(transaction.explanation||'').toLowerCase();
+  if(/\bcash[\s-]+advance\b/.test(explanation))return 'cash-advance';
+  if(/\breimburse(?:ment|ments|d|s|ing)?\b/.test(explanation))return 'reimburse';
+  return 'other';
+}
 
 function renderDashboard(){
   const txs=[...getTxs()].sort((left,right)=>String(right.updatedAt||'').localeCompare(String(left.updatedAt||'')));
   const counts={recent:txs.length,draft:txs.filter(t=>normalizedTransactionStatus(t.status)==='Draft').length,done:txs.filter(t=>normalizedTransactionStatus(t.status)==='Done').length};
   const activeStatus=dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
-  const visibleTxs=dashboardTab==='recent'?txs:txs.filter(t=>normalizedTransactionStatus(t.status)===activeStatus);
+  const statusTxs=dashboardTab==='recent'?txs:txs.filter(t=>normalizedTransactionStatus(t.status)===activeStatus);
+  const visibleTxs=statusTxs.filter(t=>dashboardTypeTab==='all'||dashboardTransactionCategory(t)===dashboardTypeTab);
+  const typeCounts={all:txs.length,cashAdvance:txs.filter(t=>dashboardTransactionCategory(t)==='cash-advance').length,reimburse:txs.filter(t=>dashboardTransactionCategory(t)==='reimburse').length};
   document.getElementById('txCount').textContent=txs.length;
   document.getElementById('dashboardDate').textContent=new Date().toLocaleDateString('en-PH',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
   document.querySelectorAll('.dashboard-tab').forEach(button=>{
@@ -255,13 +270,23 @@ function renderDashboard(){
     button.classList.toggle('active',active);
     button.setAttribute('aria-selected',String(active));
   });
+  document.querySelectorAll('.dashboard-type-tab').forEach(button=>{
+    const active=button.dataset.dashboardType===dashboardTypeTab;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-selected',String(active));
+  });
   document.getElementById('recentTabCount').textContent=counts.recent;
   document.getElementById('draftTabCount').textContent=counts.draft;
   document.getElementById('doneTabCount').textContent=counts.done;
+  document.getElementById('typeAllCount').textContent=typeCounts.all;
+  document.getElementById('typeCashAdvanceCount').textContent=typeCounts.cashAdvance;
+  document.getElementById('typeReimburseCount').textContent=typeCounts.reimburse;
   const hasTransactions=visibleTxs.length>0;
   document.getElementById('emptyState').classList.toggle('hidden',hasTransactions);
-  document.getElementById('emptyStateTitle').textContent=txs.length?'No '+(dashboardTab==='recent'?'recent':dashboardTab)+' transactions':'No transactions yet';
-  document.getElementById('emptyStateText').textContent=txs.length?'Transactions in this category will appear here.':'Create your first transaction to begin preparing attachments.';
+  const typeLabel=dashboardTypeTab==='cash-advance'?'Cash Advance':dashboardTypeTab==='reimburse'?'Reimburse':'';
+  const statusLabel=dashboardTab==='recent'?'':dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
+  document.getElementById('emptyStateTitle').textContent=txs.length?'No '+[statusLabel,typeLabel].filter(Boolean).join(' ')+' transactions':'No transactions yet';
+  document.getElementById('emptyStateText').textContent=txs.length?'Transactions matching these filters will appear here.':'Create your first transaction to begin preparing attachments.';
   document.getElementById('txRows').innerHTML=visibleTxs.map(t=>`<tr class="dashboard-row">
     <td data-label="Transaction"><div class="dashboard-transaction-summary"><span class="transaction-badge"><span class="transaction-badge-dot"></span>${esc(t.type||'—')}</span><span class="dashboard-status status-${normalizedTransactionStatus(t.status).toLowerCase()}"><span class="dashboard-status-dot"></span>${normalizedTransactionStatus(t.status)}</span></div></td>
     <td data-label="Travel Details"><div class="dashboard-travel-stack"><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></span><span>${esc(travelDateRange(t))}</span></div><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>${esc(t.destination||'—')}</span></div></div></td>

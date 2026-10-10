@@ -185,6 +185,14 @@ body{font-family:Arial,Helvetica,sans-serif}
   .dashboard-tab-count{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#e2e8f0;color:#475569;font-size:9px;font-weight:900}
   .dashboard-tab.active .dashboard-tab-count{background:#dbeafe;color:#1d4ed8}
   .dashboard-table-scroll{overflow:visible}
+  .transactions-filter-bar{display:flex;align-items:center;gap:12px;padding:11px 21px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
+  .transactions-filter-label{flex:0 0 auto;color:#64748b;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .dashboard-type-tabs{display:flex;align-items:center;gap:5px;min-width:0;padding:3px;border:1px solid #e2e8f0;border-radius:10px;background:#fff}
+  .dashboard-type-tab{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:6px 10px;border-radius:7px;color:#64748b;font-size:10px;font-weight:800;line-height:1;white-space:nowrap;transition:background-color .15s ease,color .15s ease,box-shadow .15s ease}
+  .dashboard-type-tab:hover{background:#eff6ff;color:#1e40af}
+  .dashboard-type-tab.active{background:#dbeafe;color:#1d4ed8;box-shadow:0 1px 3px rgba(15,23,42,.1)}
+  .dashboard-type-tab:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+  .dashboard-type-tab.active .dashboard-tab-count{background:#fff;color:#1d4ed8}
   .dashboard-table{width:100%;min-width:0;table-layout:fixed;font-size:13px}
   .dashboard-col-transaction{width:15%}.dashboard-col-travel{width:20%}.dashboard-col-purpose{width:19%}.dashboard-col-note{width:19%}.dashboard-col-amount{width:9%}.dashboard-col-actions{width:18%}
   .dashboard-table thead{background:#f8fafc;color:#64748b;text-align:left;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
@@ -607,6 +615,9 @@ body{font-family:Arial,Helvetica,sans-serif}
     .dashboard-stat-icon svg{width:19px;height:19px}
     .transactions-card{border-radius:14px}
     .transactions-header{gap:12px;padding:15px}
+    .transactions-filter-bar{align-items:flex-start;flex-direction:column;gap:7px;padding:11px 14px}
+    .dashboard-type-tabs{width:100%;box-sizing:border-box;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+    .dashboard-type-tab{min-height:36px;flex:0 0 auto;padding:7px 9px;font-size:10px}
     .transactions-title-wrap{align-items:flex-start}
     .dashboard-tabs{gap:5px}
     .dashboard-tab{min-width:0;padding:8px 9px;font-size:11px}
