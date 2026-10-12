@@ -1456,7 +1456,7 @@ function renderRER(t){
       <div class="rer-meta"><div><b>Entity Name:</b> <span class="rer-line"></span><br><b>Date:</b> ${esc(date)}</div><div><b>Fund Cluster:</b> <span class="rer-line"></span><br><b>RER No.:</b> <span class="rer-line"></span></div></div>
       <div class="rer-received">RECEIVED from <b>${esc(t.payee||'')}</b><i>(Name)</i></div>
       <div class="rer-designation"><b>${esc(t.position||'')}</b><i>(Official Designation)</i></div>
-      <div class="rer-amount"><span>of</span><b>${esc(amountInWords(amount))}</b><strong>(₱${money(amount)})</strong><i>(In Words)</i><i>(In Figures)</i></div>
+      <div class="rer-amount"><div class="rer-amount-main"><span>of</span><b>${esc(amountInWords(amount))}</b><strong>(₱${money(amount)})</strong></div><div class="rer-amount-labels"><span aria-hidden="true"></span><i>(In Words)</i><i>(In Figures)</i></div></div>
       <div class="rer-payment"><span>in payment for</span><b>${esc([means,route,'FARE'].filter(Boolean).join(' '))}</b></div>
       <div class="rer-hint">(Payments for subsistence, services,<br>rental or transportation should show inclusive dates,</div>
       <div class="rer-purpose"><span>${esc(t.purpose||'')}</span><small>Travel: ${esc(travelDateRange(t))}</small><i>(purpose, distance, inclusive points of travel, etc.)</i></div>
