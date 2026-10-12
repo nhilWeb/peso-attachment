@@ -111,17 +111,20 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .note-modal-actions{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid #e2e8f0;background:#f8fafc}
   .note-save-btn{background:#6d28d9;color:#fff}
   .note-save-btn:hover{background:#5b21b6}
-  .itinerary-loader-card{width:min(640px,100%);max-height:min(760px,calc(100dvh - 40px));display:flex;flex-direction:column}
-  .itinerary-loader-card .note-modal-body{min-height:0;overflow:auto}
+  .itinerary-loader-card{width:min(680px,100%);max-height:min(760px,calc(100dvh - 40px));display:flex;flex-direction:column;overflow:hidden}
+  .itinerary-loader-card .note-modal-body{min-height:0;overflow:auto;overscroll-behavior:contain}
+  .itinerary-loader-card .note-modal-heading>div:last-child{min-width:0}
+  .itinerary-loader-card #itineraryLoaderTitle{line-height:1.3;overflow-wrap:anywhere}
+  .itinerary-loader-card #itineraryLoaderDescription{line-height:1.5;overflow-wrap:anywhere}
   .itinerary-loader-icon{background:#e0f2fe;color:#0369a1}
-  .itinerary-loader-matches{display:grid;gap:9px;margin-top:20px}
-  .itinerary-loader-option{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:15px;width:100%;padding:13px 14px;border:1px solid #e2e8f0;border-radius:11px;background:#fff;text-align:left;transition:border-color .15s ease,background-color .15s ease,box-shadow .15s ease}
+  .itinerary-loader-matches{display:grid;gap:10px;margin-top:20px}
+  .itinerary-loader-option{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr) auto;align-items:center;gap:8px 18px;width:100%;padding:14px 15px;border:1px solid #e2e8f0;border-radius:11px;background:#fff;text-align:left;transition:border-color .15s ease,background-color .15s ease,box-shadow .15s ease}
   .itinerary-loader-option:hover,.itinerary-loader-option:focus-visible{border-color:#7dd3fc;background:#f0f9ff;box-shadow:0 0 0 3px rgba(14,165,233,.1);outline:none}
-  .itinerary-loader-option-main,.itinerary-loader-option-meta{display:grid;min-width:0;gap:4px}
-  .itinerary-loader-option-main strong{color:#0f172a;font-size:12px;overflow-wrap:anywhere}
-  .itinerary-loader-option-main span,.itinerary-loader-option-meta span{color:#64748b;font-size:10px;line-height:1.4;overflow-wrap:anywhere}
-  .itinerary-loader-option-meta{text-align:right}
-  .itinerary-loader-option-action{padding:7px 10px;border-radius:8px;background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:900}
+  .itinerary-loader-option-main,.itinerary-loader-option-meta{display:grid;min-width:0;gap:5px}
+  .itinerary-loader-option-main strong{color:#0f172a;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+  .itinerary-loader-option-main span,.itinerary-loader-option-meta span{color:#64748b;font-size:11px;line-height:1.45;overflow-wrap:anywhere}
+  .itinerary-loader-option-meta{text-align:left}
+  .itinerary-loader-option-action{justify-self:end;padding:8px 12px;border-radius:8px;background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:900;white-space:nowrap}
   .itinerary-loader-empty{padding:20px;border:1px dashed #cbd5e1;border-radius:11px;background:#f8fafc;color:#64748b;font-size:12px;line-height:1.5;text-align:center}
   .itinerary-loader-empty strong{color:#0f172a}
   .note-reminder{position:fixed;right:22px;bottom:22px;z-index:1050;width:min(360px,calc(100vw - 44px));padding:16px 40px 16px 17px;border:1px solid #c4b5fd;border-radius:15px;background:#fff;box-shadow:0 16px 40px rgba(76,29,149,.2);color:#312e81;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .25s ease,transform .25s ease}
@@ -770,6 +773,13 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
     .confirmation-body,.note-modal-body{padding:18px}
     .confirmation-actions,.note-modal-actions{padding:12px 16px;gap:8px}
     .confirmation-actions .btn,.note-modal-actions .btn{min-height:44px;flex:1}
+    .itinerary-loader-card{width:min(100%,680px);max-height:calc(100dvh - 20px);overflow:hidden}
+    .itinerary-loader-card .note-modal-body{min-height:0;overflow:auto;padding:16px}
+    .itinerary-loader-option{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:12px}
+    .itinerary-loader-option-meta{grid-column:1;text-align:left}
+    .itinerary-loader-option-action{grid-column:2;grid-row:1/3}
+    .itinerary-loader-card .note-modal-actions{flex-shrink:0}
+    .itinerary-loader-card .note-modal-actions .btn{min-width:110px;flex:0 0 auto}
     .note-input-help{flex-direction:column;gap:4px}
     .api-status{top:10px;max-width:calc(100vw - 24px)}
   }
