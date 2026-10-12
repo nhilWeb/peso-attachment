@@ -205,6 +205,11 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .dashboard-table-scroll{overflow:visible}
   .transactions-filter-bar{display:flex;align-items:center;gap:12px;padding:11px 21px;border-bottom:1px solid #e2e8f0;background:#f8fafc}
   .transactions-filter-label{flex:0 0 auto;color:#64748b;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .dashboard-search{display:flex;align-items:center;gap:8px;flex:0 1 310px;min-width:190px;margin-left:auto;padding:0 11px;border:1px solid #cbd5e1;border-radius:9px;background:#fff;color:#64748b;transition:border-color .15s ease,box-shadow .15s ease}
+  .dashboard-search svg{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .dashboard-search input{width:100%;min-width:0;min-height:36px;padding:0;border:0;outline:0;background:transparent;color:#1e293b;font:inherit;font-size:12px}
+  .dashboard-search input::placeholder{color:#94a3b8}
+  .dashboard-search:focus-within{border-color:#60a5fa;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
   .dashboard-type-tabs{display:flex;align-items:center;gap:5px;min-width:0;padding:3px;border:1px solid #e2e8f0;border-radius:10px;background:#fff}
   .dashboard-type-tab{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:32px;padding:6px 10px;border-radius:7px;color:#64748b;font-size:10px;font-weight:800;line-height:1;white-space:nowrap;transition:background-color .15s ease,color .15s ease,box-shadow .15s ease}
   .dashboard-type-tab:hover{background:#eff6ff;color:#1e40af}
@@ -487,6 +492,8 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .preview-document-scroll .paper{margin-bottom:0;box-shadow:0 18px 42px rgba(15,23,42,.2)}
   @keyframes dashboard-enter{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
   @media(max-width:1000px){
+    .transactions-filter-bar{flex-wrap:wrap}
+    .dashboard-search{flex:1 1 230px;margin-left:auto}
     .dashboard-table-scroll{padding:12px;background:#f8fafc}
     .dashboard-table,.dashboard-table tbody{display:block;width:100%}
     .dashboard-table colgroup,.dashboard-table thead{display:none}
@@ -655,6 +662,7 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
     .transactions-header{gap:12px;padding:15px}
     .transactions-filter-bar{align-items:flex-start;flex-direction:column;gap:7px;padding:11px 14px}
     .dashboard-type-tabs{width:100%;box-sizing:border-box;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+    .dashboard-search{width:100%;max-width:none;min-width:0;box-sizing:border-box;flex:0 0 auto;margin-left:0}
     .dashboard-type-tab{min-height:36px;flex:0 0 auto;padding:7px 9px;font-size:10px}
     .transactions-title-wrap{align-items:flex-start}
     .dashboard-tabs{gap:5px}

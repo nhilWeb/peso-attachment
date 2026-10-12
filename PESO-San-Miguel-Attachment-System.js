@@ -5,7 +5,7 @@ const BAGONG_PILIPINAS_LOGO_URI='Bagong_Pilipinas_logo.png';
 const VIEW_STATE_KEY='sm_live_view_state_v1', LOGOS_KEY='sm_template_logos_enabled_v1';
 const APP_VIEWS=['dashboard','form','preview','settings'];
 const TEMPLATE_KEYS=['or','dv','to','itinerary','rer'];
-let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
+let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, dashboardSearchQuery='', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
 const DASHBOARD_PAGE_SIZE=10;
 let transactions=[],systemSettings=null,remoteReady=false,apiStatusTimer=null;
 const API_CONFIG=window.PESO_CONFIG||{};
@@ -251,6 +251,11 @@ document.querySelectorAll('.dashboard-type-tab').forEach(button=>{
     renderDashboard();
   });
 });
+document.getElementById('dashboardSearchInput').addEventListener('input',event=>{
+  dashboardSearchQuery=normalizeDashboardSearch(event.target.value);
+  dashboardPage=1;
+  renderDashboard();
+});
 document.getElementById('dashboardPagination').addEventListener('click',event=>{
   const button=event.target.closest('[data-dashboard-page]');
   if(!button||button.disabled)return;
@@ -266,12 +271,30 @@ function dashboardTransactionCategory(transaction){
   return 'other';
 }
 
+function normalizeDashboardSearch(value){
+  return String(value??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
+}
+
+function matchesDashboardSearch(transaction,query){
+  if(!query)return true;
+  const searchableFields=[
+    transaction.type,transaction.orNo,transaction.dvNo,transaction.payee,
+    transaction.transactionDate,transaction.position,transaction.office,transaction.address,
+    transaction.travelFrom,transaction.travelTo,transaction.destination,
+    transaction.dateReturn,transaction.purpose,transaction.explanation,
+    transaction.responsibilityCenter,transaction.responsibilityCenterName,transaction.ffp,
+    transaction.accountCode,transaction.particulars,transaction.totalAmount,
+    transaction.status,transaction.note,JSON.stringify(transaction.itinerary||[])
+  ];
+  return normalizeDashboardSearch(searchableFields.filter(value=>value!==undefined&&value!==null).join(' ')).includes(query);
+}
+
 function renderDashboard(){
   const txs=[...getTxs()].sort((left,right)=>String(right.updatedAt||'').localeCompare(String(left.updatedAt||'')));
   const counts={recent:txs.length,draft:txs.filter(t=>normalizedTransactionStatus(t.status)==='Draft').length,done:txs.filter(t=>normalizedTransactionStatus(t.status)==='Done').length};
   const activeStatus=dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
   const statusTxs=dashboardTab==='recent'?txs:txs.filter(t=>normalizedTransactionStatus(t.status)===activeStatus);
-  const visibleTxs=statusTxs.filter(t=>dashboardTypeTab==='all'||dashboardTransactionCategory(t)===dashboardTypeTab);
+  const visibleTxs=statusTxs.filter(t=>(dashboardTypeTab==='all'||dashboardTransactionCategory(t)===dashboardTypeTab)&&matchesDashboardSearch(t,dashboardSearchQuery));
   const pageCount=Math.max(1,Math.ceil(visibleTxs.length/DASHBOARD_PAGE_SIZE));
   dashboardPage=Math.min(Math.max(1,dashboardPage),pageCount);
   const pageStart=(dashboardPage-1)*DASHBOARD_PAGE_SIZE;
@@ -299,8 +322,8 @@ function renderDashboard(){
   document.getElementById('emptyState').classList.toggle('hidden',hasTransactions);
   const typeLabel=dashboardTypeTab==='cash-advance'?'Cash Advance':dashboardTypeTab==='reimburse'?'Reimburse':'';
   const statusLabel=dashboardTab==='recent'?'':dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
-  document.getElementById('emptyStateTitle').textContent=txs.length?'No '+[statusLabel,typeLabel].filter(Boolean).join(' ')+' transactions':'No transactions yet';
-  document.getElementById('emptyStateText').textContent=txs.length?'Transactions matching these filters will appear here.':'Create your first transaction to begin preparing attachments.';
+  document.getElementById('emptyStateTitle').textContent=dashboardSearchQuery?'No matching transactions':txs.length?'No '+[statusLabel,typeLabel].filter(Boolean).join(' ')+' transactions':'No transactions yet';
+  document.getElementById('emptyStateText').textContent=dashboardSearchQuery?'Try another search or adjust the selected filters.':txs.length?'Transactions matching these filters will appear here.':'Create your first transaction to begin preparing attachments.';
   document.getElementById('txRows').innerHTML=pageTxs.map(t=>`<tr class="dashboard-row">
     <td data-label="Transaction"><div class="dashboard-transaction-summary"><span class="transaction-badge"><span class="transaction-badge-dot"></span>${esc(t.type||'—')}</span><span class="dashboard-status status-${normalizedTransactionStatus(t.status).toLowerCase()}"><span class="dashboard-status-dot"></span>${normalizedTransactionStatus(t.status)}</span></div></td>
     <td data-label="Travel Details"><div class="dashboard-travel-stack"><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></span><span>${esc(travelDateRange(t))}</span></div><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>${esc(t.destination||'—')}</span></div></div></td>
