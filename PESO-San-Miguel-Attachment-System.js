@@ -5,7 +5,8 @@ const BAGONG_PILIPINAS_LOGO_URI='Bagong_Pilipinas_logo.png';
 const VIEW_STATE_KEY='sm_live_view_state_v1', LOGOS_KEY='sm_template_logos_enabled_v1';
 const APP_VIEWS=['dashboard','form','preview','settings'];
 const TEMPLATE_KEYS=['or','dv','to','itinerary','rer'];
-let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
+let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
+const DASHBOARD_PAGE_SIZE=10;
 let transactions=[],systemSettings=null,remoteReady=false,apiStatusTimer=null;
 const API_CONFIG=window.PESO_CONFIG||{};
 let itinerary=[
@@ -239,14 +240,22 @@ document.getElementById('backDash').onclick=()=>showView('dashboard');
 document.querySelectorAll('.dashboard-tab').forEach(button=>{
   button.addEventListener('click',()=>{
     dashboardTab=button.dataset.dashboardTab;
+    dashboardPage=1;
     renderDashboard();
   });
 });
 document.querySelectorAll('.dashboard-type-tab').forEach(button=>{
   button.addEventListener('click',()=>{
     dashboardTypeTab=button.dataset.dashboardType;
+    dashboardPage=1;
     renderDashboard();
   });
+});
+document.getElementById('dashboardPagination').addEventListener('click',event=>{
+  const button=event.target.closest('[data-dashboard-page]');
+  if(!button||button.disabled)return;
+  dashboardPage+=Number(button.dataset.dashboardPage);
+  renderDashboard();
 });
 
 function dashboardTransactionCategory(transaction){
@@ -263,6 +272,10 @@ function renderDashboard(){
   const activeStatus=dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
   const statusTxs=dashboardTab==='recent'?txs:txs.filter(t=>normalizedTransactionStatus(t.status)===activeStatus);
   const visibleTxs=statusTxs.filter(t=>dashboardTypeTab==='all'||dashboardTransactionCategory(t)===dashboardTypeTab);
+  const pageCount=Math.max(1,Math.ceil(visibleTxs.length/DASHBOARD_PAGE_SIZE));
+  dashboardPage=Math.min(Math.max(1,dashboardPage),pageCount);
+  const pageStart=(dashboardPage-1)*DASHBOARD_PAGE_SIZE;
+  const pageTxs=visibleTxs.slice(pageStart,pageStart+DASHBOARD_PAGE_SIZE);
   const typeCounts={all:txs.length,cashAdvance:txs.filter(t=>dashboardTransactionCategory(t)==='cash-advance').length,reimburse:txs.filter(t=>dashboardTransactionCategory(t)==='reimburse').length};
   document.getElementById('txCount').textContent=txs.length;
   document.getElementById('dashboardDate').textContent=new Date().toLocaleDateString('en-PH',{weekday:'long',month:'long',day:'numeric',year:'numeric'});
@@ -288,7 +301,7 @@ function renderDashboard(){
   const statusLabel=dashboardTab==='recent'?'':dashboardTab[0].toUpperCase()+dashboardTab.slice(1);
   document.getElementById('emptyStateTitle').textContent=txs.length?'No '+[statusLabel,typeLabel].filter(Boolean).join(' ')+' transactions':'No transactions yet';
   document.getElementById('emptyStateText').textContent=txs.length?'Transactions matching these filters will appear here.':'Create your first transaction to begin preparing attachments.';
-  document.getElementById('txRows').innerHTML=visibleTxs.map(t=>`<tr class="dashboard-row">
+  document.getElementById('txRows').innerHTML=pageTxs.map(t=>`<tr class="dashboard-row">
     <td data-label="Transaction"><div class="dashboard-transaction-summary"><span class="transaction-badge"><span class="transaction-badge-dot"></span>${esc(t.type||'—')}</span><span class="dashboard-status status-${normalizedTransactionStatus(t.status).toLowerCase()}"><span class="dashboard-status-dot"></span>${normalizedTransactionStatus(t.status)}</span></div></td>
     <td data-label="Travel Details"><div class="dashboard-travel-stack"><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg></span><span>${esc(travelDateRange(t))}</span></div><div class="dashboard-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></span><span>${esc(t.destination||'—')}</span></div></div></td>
     <td data-label="Purpose of Travel"><div class="dashboard-cell dashboard-purpose-cell"><span class="dashboard-cell-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 10h16M4 15h11M4 20h8"></path></svg></span><span class="dashboard-purpose" title="${esc(t.purpose||'No purpose provided')}">${esc(t.purpose||'No purpose provided')}</span></div></td>
@@ -302,6 +315,14 @@ function renderDashboard(){
       <button class="icon-btn icon-delete" title="Delete" aria-label="Delete transaction" onclick="deleteTx('${t.id}')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 15H6L5 6"></path><path d="M10 11v6M14 11v6"></path></svg></button>
     </div></td>
   </tr>`).join('');
+  const pagination=document.getElementById('dashboardPagination');
+  pagination.hidden=visibleTxs.length<=DASHBOARD_PAGE_SIZE;
+  document.getElementById('dashboardPageSummary').textContent=visibleTxs.length
+    ?`Showing ${pageStart+1}–${Math.min(pageStart+DASHBOARD_PAGE_SIZE,visibleTxs.length)} of ${visibleTxs.length}`
+    :'Showing 0 transactions';
+  document.getElementById('dashboardPageNumber').textContent=`Page ${dashboardPage} of ${pageCount}`;
+  pagination.querySelector('[data-dashboard-page="-1"]').disabled=dashboardPage===1;
+  pagination.querySelector('[data-dashboard-page="1"]').disabled=dashboardPage===pageCount;
 }
 function travelDateRange(t){
   const from=fdate(t.travelFrom),to=fdate(t.dateReturn||t.travelTo);

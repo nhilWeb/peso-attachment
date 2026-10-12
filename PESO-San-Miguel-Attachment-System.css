@@ -237,6 +237,14 @@ body{font-family:Arial,Helvetica,sans-serif}
   .dashboard-table .icon-btn{width:32px;height:32px;background:#f8fafc;border:1px solid #e2e8f0}
   .dashboard-table .icon-btn:hover{background:#eef2ff;border-color:#cbd5e1}
   .dashboard-empty{padding:48px 20px;text-align:center;color:#64748b}
+  .dashboard-pagination{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 20px;border-top:1px solid #e2e8f0;background:#fff}
+  .dashboard-pagination[hidden]{display:none}
+  .dashboard-page-summary,.dashboard-page-number{color:#64748b;font-size:11px;font-weight:700}
+  .dashboard-page-controls{display:flex;align-items:center;gap:10px}
+  .dashboard-page-button{min-height:34px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#334155;font-size:11px;font-weight:800;transition:background-color .15s ease,border-color .15s ease,color .15s ease}
+  .dashboard-page-button:hover:not(:disabled){border-color:#93c5fd;background:#eff6ff;color:#1d4ed8}
+  .dashboard-page-button:focus-visible{outline:2px solid #2563eb;outline-offset:2px}
+  .dashboard-page-button:disabled{cursor:not-allowed;opacity:.45}
   .dashboard-empty.hidden{display:none}
   .dashboard-empty-icon{display:flex;align-items:center;justify-content:center;width:58px;height:58px;margin:0 auto 13px;border-radius:17px;background:#eff6ff;color:#2563eb}
   .dashboard-empty-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -489,6 +497,8 @@ body{font-family:Arial,Helvetica,sans-serif}
     .transactions-header{align-items:flex-start;flex-direction:column}
     .dashboard-tabs{width:100%;justify-content:space-between}
     .dashboard-tab{flex:1}
+    .dashboard-pagination{align-items:flex-start;flex-direction:column;padding:12px}
+    .dashboard-page-controls{width:100%;justify-content:space-between}
     .settings-hero{align-items:flex-start;flex-direction:column;padding:23px}
     .settings-local-pill{align-self:flex-start}
     .settings-grid{grid-template-columns:1fr;padding:16px}

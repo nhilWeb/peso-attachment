@@ -88,6 +88,14 @@
           <tbody id="txRows"></tbody>
         </table>
       </div>
+      <div id="dashboardPagination" class="dashboard-pagination no-print" aria-label="Saved transaction pages" hidden>
+        <div class="dashboard-page-summary" id="dashboardPageSummary" aria-live="polite">Showing 0 transactions</div>
+        <div class="dashboard-page-controls">
+          <button type="button" class="dashboard-page-button" data-dashboard-page="-1" aria-label="Previous page">Previous</button>
+          <span id="dashboardPageNumber" class="dashboard-page-number" aria-live="polite">Page 1 of 1</span>
+          <button type="button" class="dashboard-page-button" data-dashboard-page="1" aria-label="Next page">Next</button>
+        </div>
+      </div>
       <div id="emptyState" class="dashboard-empty">
         <div class="dashboard-empty-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"></path><path d="M14 2v6h6M9 15h6M12 12v6"></path></svg></div>
         <div id="emptyStateTitle" class="dashboard-empty-title">No transactions yet</div>
