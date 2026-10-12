@@ -1021,6 +1021,54 @@ function renderItinerary(){
 }
 function removeItin(i){itinerary.splice(i,1);renderItinerary()}
 document.getElementById('addItinerary').onclick=()=>{itinerary.push({dateRange:'',from:'',to:'',departure:'',arrival:'',means:'',transport:0,perDiem:0,others:0});renderItinerary()}
+function normalizedDestination(value){return String(value||'').trim().replace(/\s+/g,' ').toLocaleLowerCase()}
+function closeItineraryLoader(){
+  const modal=document.getElementById('itineraryLoaderModal');
+  modal.classList.remove('open');
+  modal.setAttribute('aria-hidden','true');
+  document.getElementById('loadItinerary').focus();
+}
+function openItineraryLoader(){
+  const destination=String(document.getElementById('destination').value||'').trim();
+  const destinationKey=normalizedDestination(destination);
+  const matches=destinationKey?getTxs()
+    .filter(transaction=>normalizedDestination(transaction.destination)===destinationKey&&Array.isArray(transaction.itinerary)&&transaction.itinerary.length)
+    .sort((left,right)=>String(right.updatedAt||'').localeCompare(String(left.updatedAt||''))):[];
+  document.getElementById('itineraryLoaderDescription').textContent=destination
+    ?`Saved itineraries matching “${destination}”. Loading one replaces the itinerary rows currently in this form.`
+    :'Enter a travel destination first to find matching saved itineraries.';
+  document.getElementById('itineraryLoaderMatches').innerHTML=matches.length?matches.map(transaction=>{
+    const rows=transaction.itinerary;
+    const routeStart=String(rows[0]?.from||'').trim();
+    const routeEnd=String(rows[rows.length-1]?.to||'').trim();
+    const route=routeStart||routeEnd?`${routeStart||'—'} to ${routeEnd||'—'}`:'Route details not set';
+    return `<button type="button" class="itinerary-loader-option" data-itinerary-source="${esc(transaction.id)}">
+      <span class="itinerary-loader-option-main"><strong>${esc(transaction.payee||transaction.type||'Saved transaction')}</strong><span>${esc(transaction.type||'Transaction')} · ${esc(travelDateRange(transaction)||'Travel dates not set')}</span></span>
+      <span class="itinerary-loader-option-meta"><span>${rows.length} ${rows.length===1?'row':'rows'}</span><span>${esc(route)}</span></span>
+      <span class="itinerary-loader-option-action">Load</span>
+    </button>`;
+  }).join(''):`<div class="itinerary-loader-empty">${destination?`No saved itinerary was found for <strong>${esc(destination)}</strong>.`:'Enter a destination in Travel Information to search saved itineraries.'}</div>`;
+  const modal=document.getElementById('itineraryLoaderModal');
+  modal.classList.add('open');
+  modal.setAttribute('aria-hidden','false');
+  (modal.querySelector('.itinerary-loader-option')||document.getElementById('itineraryLoaderCancel')).focus();
+}
+document.getElementById('loadItinerary').addEventListener('click',openItineraryLoader);
+document.getElementById('itineraryLoaderCancel').addEventListener('click',closeItineraryLoader);
+document.getElementById('itineraryLoaderModal').addEventListener('click',event=>{
+  if(event.target.id==='itineraryLoaderModal')closeItineraryLoader();
+  const option=event.target.closest('[data-itinerary-source]');
+  if(!option)return;
+  const source=getTxs().find(transaction=>String(transaction.id)===option.dataset.itinerarySource);
+  if(!source?.itinerary?.length)return;
+  itinerary=normalizeItineraryRows(JSON.parse(JSON.stringify(source.itinerary)));
+  renderItinerary();
+  closeItineraryLoader();
+  showApiStatus(`Loaded ${itinerary.length} itinerary ${itinerary.length===1?'row':'rows'} for ${source.destination}.`,'success',2400);
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&document.getElementById('itineraryLoaderModal').classList.contains('open'))closeItineraryLoader();
+});
 function total(){return itinerary.reduce((s,r)=>s+Number(r.transport||0)+Number(r.perDiem||0)+Number(r.others||0),0)}
 function updateTotal(){document.getElementById('totalAmount').textContent=money(total())}
 function collect(){

@@ -6,7 +6,7 @@
 <title>PESO San Miguel Attachment System</title>
 <link rel="icon" type="image/x-icon" href="PESO-Logo.ico">
 <link rel="preload" as="image" href="Bagong_Pilipinas_logo.png">
-<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261010-4">
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261012-1">
 </head>
 <body class="bg-slate-100 text-slate-900">
 <header class="app-header no-print">
@@ -164,7 +164,7 @@
         </div>
 
         <div class="transaction-section section-sky">
-          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg></div><div><div class="transaction-section-title">Itinerary</div><div class="transaction-section-subtitle">The calculated itinerary total becomes the OR and DV amount automatically.</div></div></div><button type="button" id="addItinerary" class="itinerary-add-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Row</button></div>
+          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg></div><div><div class="transaction-section-title">Itinerary</div><div class="transaction-section-subtitle">The calculated itinerary total becomes the OR and DV amount automatically.</div></div></div><div class="itinerary-header-actions"><button type="button" id="loadItinerary" class="itinerary-load-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"></path><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"></path></svg>Load Itinerary</button><button type="button" id="addItinerary" class="itinerary-add-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Row</button></div></div>
           <div class="transaction-section-body">
             <div class="itinerary-table-wrap"><table class="itinerary-table"><thead><tr><th>Date</th><th>From</th><th>To</th><th>Depart</th><th>Arrival</th><th>Means</th><th>Transport</th><th>Per Diem</th><th>Others</th><th aria-label="Remove row"></th></tr></thead><tbody id="itinRows"></tbody></table></div>
             <div class="itinerary-summary"><div class="itinerary-total"><span class="itinerary-total-label">Calculated Total</span><strong class="itinerary-total-value">₱<span id="totalAmount">0.00</span></strong></div></div>
@@ -369,6 +369,21 @@
   </div>
 </div>
 
+<div id="itineraryLoaderModal" class="note-modal itinerary-loader-modal no-print" aria-hidden="true">
+  <div class="note-card itinerary-loader-card" role="dialog" aria-modal="true" aria-labelledby="itineraryLoaderTitle" aria-describedby="itineraryLoaderDescription">
+    <div class="note-modal-body">
+      <div class="note-modal-heading">
+        <div class="note-modal-icon itinerary-loader-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16"></path><circle cx="8" cy="5" r="1"></circle><circle cx="14" cy="12" r="1"></circle><circle cx="10" cy="19" r="1"></circle></svg></div>
+        <div><h2 id="itineraryLoaderTitle" class="text-lg font-bold">Load a saved itinerary</h2><p id="itineraryLoaderDescription" class="text-sm text-slate-500 mt-1">Choose an itinerary saved for this destination.</p></div>
+      </div>
+      <div id="itineraryLoaderMatches" class="itinerary-loader-matches" aria-live="polite"></div>
+    </div>
+    <div class="note-modal-actions">
+      <button type="button" id="itineraryLoaderCancel" class="btn bg-slate-200">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <div id="noteModal" class="note-modal no-print" aria-hidden="true">
   <div class="note-card" role="dialog" aria-modal="true" aria-labelledby="noteModalTitle" aria-describedby="noteModalDescription">
     <div class="note-modal-body">
@@ -397,6 +412,6 @@
 <script src="config.js?v=20260813-1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
-<script src="PESO-San-Miguel-Attachment-System.js?v=20261010-3"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20261012-1"></script>
 </body>
 </html>

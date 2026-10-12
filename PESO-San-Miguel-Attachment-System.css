@@ -110,6 +110,19 @@ body{font-family:Arial,Helvetica,sans-serif}
   .note-modal-actions{display:flex;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid #e2e8f0;background:#f8fafc}
   .note-save-btn{background:#6d28d9;color:#fff}
   .note-save-btn:hover{background:#5b21b6}
+  .itinerary-loader-card{width:min(640px,100%);max-height:min(760px,calc(100dvh - 40px));display:flex;flex-direction:column}
+  .itinerary-loader-card .note-modal-body{min-height:0;overflow:auto}
+  .itinerary-loader-icon{background:#e0f2fe;color:#0369a1}
+  .itinerary-loader-matches{display:grid;gap:9px;margin-top:20px}
+  .itinerary-loader-option{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:15px;width:100%;padding:13px 14px;border:1px solid #e2e8f0;border-radius:11px;background:#fff;text-align:left;transition:border-color .15s ease,background-color .15s ease,box-shadow .15s ease}
+  .itinerary-loader-option:hover,.itinerary-loader-option:focus-visible{border-color:#7dd3fc;background:#f0f9ff;box-shadow:0 0 0 3px rgba(14,165,233,.1);outline:none}
+  .itinerary-loader-option-main,.itinerary-loader-option-meta{display:grid;min-width:0;gap:4px}
+  .itinerary-loader-option-main strong{color:#0f172a;font-size:12px;overflow-wrap:anywhere}
+  .itinerary-loader-option-main span,.itinerary-loader-option-meta span{color:#64748b;font-size:10px;line-height:1.4;overflow-wrap:anywhere}
+  .itinerary-loader-option-meta{text-align:right}
+  .itinerary-loader-option-action{padding:7px 10px;border-radius:8px;background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:900}
+  .itinerary-loader-empty{padding:20px;border:1px dashed #cbd5e1;border-radius:11px;background:#f8fafc;color:#64748b;font-size:12px;line-height:1.5;text-align:center}
+  .itinerary-loader-empty strong{color:#0f172a}
   .note-reminder{position:fixed;right:22px;bottom:22px;z-index:1050;width:min(360px,calc(100vw - 44px));padding:16px 40px 16px 17px;border:1px solid #c4b5fd;border-radius:15px;background:#fff;box-shadow:0 16px 40px rgba(76,29,149,.2);color:#312e81;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .25s ease,transform .25s ease}
   .note-reminder.show{opacity:1;pointer-events:auto;transform:translateY(0)}
   .note-reminder::before{content:"";position:absolute;left:17px;top:-7px;width:13px;height:13px;border-top:1px solid #c4b5fd;border-left:1px solid #c4b5fd;background:#fff;transform:rotate(45deg)}
@@ -340,6 +353,11 @@ body{font-family:Arial,Helvetica,sans-serif}
   .itinerary-add-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 12px;border-radius:9px;background:#0f172a;color:#fff;font-size:11px;font-weight:800;box-shadow:0 6px 16px rgba(15,23,42,.17);transition:transform .15s ease,background-color .15s ease}
   .itinerary-add-btn:hover{transform:translateY(-1px);background:#1e3a8a}
   .itinerary-add-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+  .itinerary-header-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+  .itinerary-load-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:8px 11px;border:1px solid #bae6fd;border-radius:9px;background:#f0f9ff;color:#0369a1;font-size:11px;font-weight:800;transition:transform .15s ease,background-color .15s ease,border-color .15s ease}
+  .itinerary-load-btn:hover{transform:translateY(-1px);border-color:#7dd3fc;background:#e0f2fe}
+  .itinerary-load-btn:focus-visible{outline:2px solid #0284c7;outline-offset:2px}
+  .itinerary-load-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .itinerary-table-wrap{overflow:auto;border:1px solid #e2e8f0;border-radius:12px}
   .itinerary-table{width:100%;min-width:1120px;border-collapse:separate;border-spacing:0;font-size:11px}
   .itinerary-table thead{background:#f8fafc;color:#64748b;font-size:9px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
@@ -535,7 +553,7 @@ body{font-family:Arial,Helvetica,sans-serif}
     .app-logo-shell img{width:50px!important;height:50px!important}
     .app-nav{margin-left:auto}
   }
-  @media(prefers-reduced-motion:reduce){#dashboardView,#settingsView,#formView,#previewView,.dashboard-stat,.dashboard-new-btn,.icon-btn,.signatory-card,.settings-save-btn,.transaction-back-btn,.itinerary-add-btn,.transaction-preview-btn,.transaction-save-btn,.preview-tab,.template-mark-btn,.preview-edit-btn,.preview-print-btn,.preview-next-btn,.preview-logo-toggle,.preview-logo-toggle span{animation:none;transition:none}}
+  @media(prefers-reduced-motion:reduce){#dashboardView,#settingsView,#formView,#previewView,.dashboard-stat,.dashboard-new-btn,.icon-btn,.signatory-card,.settings-save-btn,.transaction-back-btn,.itinerary-add-btn,.itinerary-load-btn,.transaction-preview-btn,.transaction-save-btn,.preview-tab,.template-mark-btn,.preview-edit-btn,.preview-print-btn,.preview-next-btn,.preview-logo-toggle,.preview-logo-toggle span{animation:none;transition:none}}
 
 
   /* All generated attachment templates use a uniform 12px text size */
@@ -689,6 +707,11 @@ body{font-family:Arial,Helvetica,sans-serif}
     .transaction-section textarea.form-input{min-height:100px}
     .date-picker-btn{width:44px;flex-basis:44px}
     .section-sky .transaction-section-header{align-items:flex-start;flex-direction:column}
+    .itinerary-header-actions{width:100%;justify-content:flex-end;flex-wrap:wrap}
+    .itinerary-load-btn,.itinerary-add-btn{min-height:42px}
+    .itinerary-loader-option{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:12px}
+    .itinerary-loader-option-meta{grid-column:1;text-align:left}
+    .itinerary-loader-option-action{grid-column:2;grid-row:1/3}
     .itinerary-add-btn{min-height:42px}
     .itinerary-table-wrap{overflow:visible;border:0;border-radius:0}
     .itinerary-table,.itinerary-table tbody{display:block;width:100%;min-width:0}
