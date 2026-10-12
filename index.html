@@ -9,9 +9,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261012-4">
+<script>try{if(localStorage.getItem('peso-ui-theme')==='classic')document.documentElement.classList.add('classic-ui')}catch{}</script>
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261012-5">
 </head>
-<body>
+<body class="bg-slate-100 text-slate-900">
 <header class="app-header no-print">
   <div class="app-header-inner max-w-7xl mx-auto px-5 py-4 flex flex-wrap gap-3 items-center justify-between">
     <div class="app-brand flex items-center gap-3">
@@ -271,7 +272,10 @@
           <div class="settings-hero-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.97 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-1.52-1.03H3v-4h.08A1.7 1.7 0 0 0 4.6 8.94a1.7 1.7 0 0 0-.34-1.88L4.2 7l2.83-2.83.06.06A1.7 1.7 0 0 0 8.97 4.6 1.7 1.7 0 0 0 10 3.08V3h4v.08a1.7 1.7 0 0 0 1.03 1.52 1.7 1.7 0 0 0 1.88-.34l.06-.06L19.8 7l-.06.06a1.7 1.7 0 0 0-.34 1.88A1.7 1.7 0 0 0 20.92 10H21v4h-.08A1.7 1.7 0 0 0 19.4 15Z"></path></svg></div>
           <div><div class="settings-eyebrow">System Settings</div><h1>Document Signatories</h1><p>Manage the authorized officials whose names and positions appear automatically across generated financial attachments.</p></div>
         </div>
-        <div class="settings-local-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>Saved to Google Sheets</div>
+        <div class="settings-hero-actions">
+          <div class="settings-local-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path><path d="m9 12 2 2 4-4"></path></svg>Saved to Google Sheets</div>
+          <button type="button" id="uiThemeToggle" class="ui-theme-toggle" aria-pressed="false">Use previous UI</button>
+        </div>
       </div>
 
       <form id="settingsForm" class="settings-panel">
@@ -419,6 +423,6 @@
 <script src="config.js?v=20260813-1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
-<script src="PESO-San-Miguel-Attachment-System.js?v=20261012-3"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20261012-4"></script>
 </body>
 </html>

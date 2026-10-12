@@ -1759,4 +1759,17 @@ async function initializeApplication(){
     showApiStatus(`${error.message} Transactions cannot be saved until the API is available.`,'error');
   }
 }
+
+const uiThemeToggle=document.getElementById('uiThemeToggle');
+function updateUiThemeToggle(){
+  const classic=document.documentElement.classList.contains('classic-ui');
+  uiThemeToggle.setAttribute('aria-pressed',String(classic));
+  uiThemeToggle.textContent=classic?'Use Bootstrap-like UI':'Use previous UI';
+}
+uiThemeToggle.addEventListener('click',()=>{
+  const classic=document.documentElement.classList.toggle('classic-ui');
+  try{localStorage.setItem('peso-ui-theme',classic?'classic':'bootstrap')}catch{}
+  updateUiThemeToggle();
+});
+updateUiThemeToggle();
 initializeApplication();
