@@ -25,7 +25,7 @@ body{font-family:Arial,Helvetica,sans-serif}
     #printArea .itinerary-paper tr{break-inside:avoid;page-break-inside:avoid}
     @page{size:A4 portrait;margin:.7in 7mm 7mm}
     @page rer{size:A4 portrait;margin:15mm 1in}
-    #printArea .rer-grid{page:rer;box-sizing:border-box;width:159.2mm!important;max-width:159.2mm!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:1fr}
+    #printArea .rer-grid{page:rer;box-sizing:border-box;width:145mm!important;max-width:145mm!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:1fr}
     #printArea .rer-pair{grid-template-columns:1fr;break-inside:avoid;page-break-inside:avoid;break-after:page;page-break-after:always}
     #printArea .rer-pair:last-child{break-after:auto;page-break-after:auto}
     #printArea .rer-receipt{width:auto}
@@ -47,13 +47,13 @@ body{font-family:Arial,Helvetica,sans-serif}
   #pdfCaptureArea .itinerary-paper{box-sizing:border-box;height:auto;min-height:0;overflow:visible}
   #pdfCaptureArea .itinerary-paper .itinerary-data-row td{line-height:1;overflow-wrap:anywhere;word-break:break-word}
   #pdfCaptureArea .paper,#pdfCaptureArea .paper *,#pdfCaptureArea .doc-table,#pdfCaptureArea .doc-table td,#pdfCaptureArea .doc-table th,#pdfCaptureArea .small,#pdfCaptureArea .xsmall{font-size:12px!important}
-  #pdfCaptureArea .rer-grid{display:grid;grid-template-columns:1fr;gap:4mm;width:159.2mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
-  #pdfCaptureArea .rer-pair{display:grid;grid-template-columns:1fr;gap:4mm;width:100%}
+  #pdfCaptureArea .rer-grid{display:grid;grid-template-columns:1fr;gap:2mm;width:145mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
+  #pdfCaptureArea .rer-pair{display:grid;grid-template-columns:1fr;gap:2mm;width:100%}
   #pdfCaptureArea .rer-receipt{box-sizing:border-box;width:100%;min-height:106mm;margin:0;border:1.4px solid #111;padding:0 1mm;box-shadow:none;display:flex;flex-direction:column;line-height:1.15}
   #pdfCaptureArea .rer-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0;font-size:13px!important}
-  #pdfCaptureArea .rer-blanks{height:8mm;display:grid;grid-template-rows:repeat(2,1fr);border-bottom:1px solid #111}
+  #pdfCaptureArea .rer-blanks{height:7mm;display:grid;grid-template-rows:repeat(2,1fr);border-bottom:1px solid #111}
   #pdfCaptureArea .rer-blanks div+div{border-top:1px solid #ddd}
-  #pdfCaptureArea .rer-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #111;min-height:13mm;line-height:1.8}
+  #pdfCaptureArea .rer-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #111;min-height:12mm;line-height:1.8}
   #pdfCaptureArea .rer-meta>div{padding:1mm}#pdfCaptureArea .rer-meta>div+div{border-left:1px solid #111}
   #pdfCaptureArea .rer-line{display:inline-block;min-width:20mm;border-bottom:1px solid #111}
   #pdfCaptureArea .rer-received,#pdfCaptureArea .rer-designation,#pdfCaptureArea .rer-purpose{position:relative;text-align:center;border-bottom:1px solid #111;padding:1.5mm 1mm 4mm}
@@ -62,9 +62,11 @@ body{font-family:Arial,Helvetica,sans-serif}
   #pdfCaptureArea .rer-designation{min-height:8mm;padding-bottom:4mm}#pdfCaptureArea .rer-amount{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1mm;position:relative;min-height:11mm;border-bottom:1px solid #111;padding:1mm 0 4mm}
   #pdfCaptureArea .rer-amount b{font-weight:400;text-align:center}#pdfCaptureArea .rer-amount strong{font-weight:400;white-space:nowrap}#pdfCaptureArea .rer-amount i:nth-of-type(1){left:0;right:50%}#pdfCaptureArea .rer-amount i:nth-of-type(2){left:50%;right:0}
   #pdfCaptureArea .rer-payment{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1mm;min-height:9mm;border-bottom:1px solid #111}#pdfCaptureArea .rer-payment b{text-align:center;font-weight:400}
-  #pdfCaptureArea .rer-hint{text-align:center;font-style:italic;border-bottom:1px solid #111;padding:1mm}#pdfCaptureArea .rer-purpose{flex:1;min-height:13mm;padding:1mm;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4mm}#pdfCaptureArea .rer-purpose small{font-size:10px!important}#pdfCaptureArea .rer-purpose i{position:static;display:block;margin:0;font-size:10px!important}
+  #pdfCaptureArea .rer-hint{text-align:center;font-style:italic;line-height:1;border-bottom:1px solid #111;padding:.5mm}#pdfCaptureArea .rer-purpose{flex:1;min-height:13mm;padding:1mm;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4mm}#pdfCaptureArea .rer-purpose small{font-size:10px!important}#pdfCaptureArea .rer-purpose i{position:static;display:block;margin:0;font-size:10px!important}
   #pdfCaptureArea .rer-section-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0}#pdfCaptureArea .rer-sign-line,#pdfCaptureArea .rer-address-line{display:flex;align-items:center;gap:1mm;min-height:7mm}#pdfCaptureArea .rer-sign-line{min-height:10mm;align-items:flex-end;padding-bottom:.5mm;box-sizing:border-box}#pdfCaptureArea .rer-sign-line span,#pdfCaptureArea .rer-address-line span{flex:1;border-bottom:1px solid #111}
-  #pdfCaptureArea .rer-empty{box-sizing:border-box;width:190mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}#pdfCaptureArea .rer-empty p{margin:6mm 0}
+  #pdfCaptureArea .rer-empty{box-sizing:border-box;width:145mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}#pdfCaptureArea .rer-empty p{margin:6mm 0}
+  #pdfCaptureArea .rer-receipt,#pdfCaptureArea .rer-receipt *{font-size:12px!important}
+  #pdfCaptureArea .rer-receipt i,#pdfCaptureArea .rer-receipt small{font-size:12px!important}
 
   .calendar-modal{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:20px;z-index:1000}
   .calendar-modal.open{display:flex}
@@ -535,13 +537,13 @@ body{font-family:Arial,Helvetica,sans-serif}
     font-size: 12px !important;
   }
 
-  #printArea .rer-grid{display:grid;grid-template-columns:1fr;gap:4mm;width:190mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
-  #printArea .rer-pair{display:grid;grid-template-columns:1fr;gap:4mm;width:100%;break-inside:avoid;page-break-inside:avoid}
+  #printArea .rer-grid{display:grid;grid-template-columns:1fr;gap:2mm;width:145mm;margin:0 auto;font-family:'Times New Roman',Times,serif}
+  #printArea .rer-pair{display:grid;grid-template-columns:1fr;gap:2mm;width:100%;break-inside:avoid;page-break-inside:avoid}
   #printArea .rer-receipt{box-sizing:border-box;width:100%;min-height:106mm;margin:0;border:1.4px solid #111;padding:0 1mm;box-shadow:none;break-inside:avoid;page-break-inside:avoid;display:flex;flex-direction:column;line-height:1.15}
   #printArea .rer-title{text-align:center;font-weight:700;border-bottom:1px solid #111;padding:1mm 0;font-size:13px!important}
-  #printArea .rer-blanks{height:8mm;display:grid;grid-template-rows:repeat(2,1fr);border-bottom:1px solid #111}
+  #printArea .rer-blanks{height:7mm;display:grid;grid-template-rows:repeat(2,1fr);border-bottom:1px solid #111}
   #printArea .rer-blanks div+div{border-top:1px solid #ddd}
-  #printArea .rer-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #111;min-height:13mm;line-height:1.8}
+  #printArea .rer-meta{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #111;min-height:12mm;line-height:1.8}
   #printArea .rer-meta>div{padding:1mm}
   #printArea .rer-meta>div+div{border-left:1px solid #111}
   #printArea .rer-line{display:inline-block;min-width:20mm;border-bottom:1px solid #111}
@@ -556,7 +558,7 @@ body{font-family:Arial,Helvetica,sans-serif}
   #printArea .rer-amount i:nth-of-type(2){left:50%;right:0}
   #printArea .rer-payment{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:1mm;min-height:9mm;border-bottom:1px solid #111}
   #printArea .rer-payment b{text-align:center;font-weight:400}
-  #printArea .rer-hint{text-align:center;font-style:italic;border-bottom:1px solid #111;padding:1mm}
+  #printArea .rer-hint{text-align:center;font-style:italic;line-height:1;border-bottom:1px solid #111;padding:.5mm}
   #printArea .rer-purpose{flex:1;min-height:13mm;padding:1mm;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.4mm}
   #printArea .rer-purpose small{font-size:10px!important}
   #printArea .rer-purpose i{position:static;display:block;margin:0;font-size:10px!important}
@@ -564,8 +566,10 @@ body{font-family:Arial,Helvetica,sans-serif}
   #printArea .rer-sign-line,#printArea .rer-address-line{display:flex;align-items:center;gap:1mm;min-height:7mm}
   #printArea .rer-sign-line{min-height:10mm;align-items:flex-end;padding-bottom:.5mm;box-sizing:border-box}
   #printArea .rer-sign-line span,#printArea .rer-address-line span{flex:1;border-bottom:1px solid #111}
-  #printArea .rer-empty{box-sizing:border-box;width:190mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}
+  #printArea .rer-empty{box-sizing:border-box;width:145mm;margin:0 auto;padding:10mm;border:1px solid #111;font-family:'Times New Roman',Times,serif;text-align:center}
   #printArea .rer-empty p{margin:6mm 0}
+  #printArea .rer-receipt,#printArea .rer-receipt *{font-size:12px!important}
+  #printArea .rer-receipt i,#printArea .rer-receipt small{font-size:12px!important}
   @media screen and (max-width:760px){#printArea .rer-grid{width:100%;grid-template-columns:1fr}#printArea .rer-receipt{width:100%;min-height:0}}
 
   /* Responsive layout refinements for tablet and mobile screens */
