@@ -883,3 +883,16 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .ui-theme-toggle:hover{background:#e7f1ff}
   .ui-theme-toggle:focus-visible{outline:0;box-shadow:0 0 0 .25rem rgba(13,110,253,.25)}
   @media screen and (max-width:767px){.settings-hero-actions{align-self:flex-start;justify-content:flex-start}.settings-hero-actions .settings-local-pill{align-self:auto}}
+
+  .dashboard-table .dashboard-row{animation:dashboard-row-enter .32s ease-out both}
+  .dashboard-table .dashboard-row:nth-child(2){animation-delay:.035s}
+  .dashboard-table .dashboard-row:nth-child(3){animation-delay:.07s}
+  .dashboard-table .dashboard-row:nth-child(4){animation-delay:.105s}
+  .dashboard-table .dashboard-row:nth-child(5){animation-delay:.14s}
+  .dashboard-table .dashboard-row:nth-child(6){animation-delay:.175s}
+  .dashboard-table .dashboard-row:nth-child(7){animation-delay:.21s}
+  .dashboard-table .dashboard-row:nth-child(8){animation-delay:.245s}
+  .dashboard-table .dashboard-row:nth-child(9){animation-delay:.28s}
+  .dashboard-table .dashboard-row:nth-child(10){animation-delay:.315s}
+  @keyframes dashboard-row-enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  @media(prefers-reduced-motion:reduce){.dashboard-table .dashboard-row{animation:none!important}}
