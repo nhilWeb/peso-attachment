@@ -53,6 +53,14 @@ function statusFromTemplateCompletion(completion){
 }
 
 function loadTransactionFields(t){
+  const typeField=document.getElementById('type');
+  typeField.querySelectorAll('option[data-legacy-type]').forEach(option=>option.remove());
+  const savedType=normalizedTransactionType(t.type);
+  if(savedType&&!Array.from(typeField.options).some(option=>option.value===savedType)){
+    const legacyOption=document.createElement('option');
+    legacyOption.value=savedType;legacyOption.textContent=savedType;legacyOption.disabled=true;legacyOption.dataset.legacyType='true';
+    typeField.appendChild(legacyOption);
+  }
   fieldIds.forEach(k=>{
     const value=k==='type' ? normalizedTransactionType(t[k]) : (t[k]||'');
     document.getElementById(k).value=value;
@@ -807,7 +815,7 @@ async function editTx(id){
   renderItinerary();showView('form');showApiStatus('Transaction ready to edit.','success',1600);
 }
 function newTransaction(){
-  editingId=null; document.getElementById('txForm').reset();
+  editingId=null; document.getElementById('type').querySelectorAll('option[data-legacy-type]').forEach(option=>option.remove());document.getElementById('txForm').reset();
   document.getElementById('payee').value='JHONNA MAY A. PARONDA';document.getElementById('position').value='PESO Manager';document.getElementById('office').value='PESO';
   document.getElementById('address').value='Tina, San Miguel, Surigao del Sur';document.getElementById('officialStation').value='LGU - San Miguel';
   document.getElementById('destination').value='DAVAO CITY';document.getElementById('purpose').value='To attend the Training of Trainers on Ordinance Codification for the Strengthening of Local Legislative Systems in Support of Full Devolution.';
