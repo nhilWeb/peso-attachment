@@ -937,3 +937,15 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .access-code-submit{width:100%;min-height:42px;margin-top:14px;border:1px solid #0d6efd;border-radius:6px;background:#0d6efd;color:#fff;font:inherit;font-weight:600;cursor:pointer}
   .access-code-submit:hover{border-color:#0a58ca;background:#0b5ed7}
   .access-code-submit:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(13,110,253,.25)}
+
+  .itinerary-date-row{min-width:0}
+  .itinerary-date-row .date-range-input{min-width:0;flex:1}
+  .itinerary-drag-handle{display:inline-flex;align-items:center;justify-content:center;width:27px;height:32px;flex:0 0 27px;padding:0;border:1px solid #dee2e6;border-radius:5px;background:#f8f9fa;color:#6c757d;cursor:grab;touch-action:none}
+  .itinerary-drag-handle:hover{border-color:#86b7fe;background:#e7f1ff;color:#0d6efd}
+  .itinerary-drag-handle:active{cursor:grabbing}
+  .itinerary-drag-handle:focus-visible{outline:2px solid #86b7fe;outline-offset:1px}
+  .itinerary-drag-handle svg{width:14px;height:18px;fill:currentColor}
+  .itinerary-row.is-dragging{opacity:.4}
+  .itinerary-row.drop-before{box-shadow:inset 0 3px #0d6efd}
+  .itinerary-row.drop-after{box-shadow:inset 0 -3px #0d6efd}
+  @media(prefers-reduced-motion:reduce){.itinerary-row{transition:none!important}}

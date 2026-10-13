@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('peso-ui-theme')==='classic')document.documentElement.classList.add('classic-ui')}catch{}try{if(sessionStorage.getItem('peso-access-granted-v1')!=='true')document.documentElement.classList.add('access-locked')}catch{document.documentElement.classList.add('access-locked')}</script>
-<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261013-4">
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261013-6">
 </head>
 <body class="bg-slate-100 text-slate-900">
 <div id="accessCodeModal" class="access-code-modal" role="presentation">
@@ -177,7 +177,7 @@
         </div>
 
         <div class="transaction-section section-sky">
-          <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg></div><div><div class="transaction-section-title">Itinerary</div><div class="transaction-section-subtitle">The calculated itinerary total becomes the OR and DV amount automatically.</div></div></div><div class="itinerary-header-actions"><button type="button" id="loadItinerary" class="itinerary-load-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"></path><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"></path></svg>Load Itinerary</button><button type="button" id="addItinerary" class="itinerary-add-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Row</button></div></div>
+      <div class="transaction-section-header"><div class="transaction-section-title-wrap"><div class="transaction-section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M5 6v14h14V6M8 10h8M8 14h8M8 18h5"></path></svg></div><div><div class="transaction-section-title">Itinerary</div><div class="transaction-section-subtitle">Drag a row by its dotted handle to reorder it. The calculated itinerary total becomes the OR and DV amount automatically.</div></div></div><div class="itinerary-header-actions"><button type="button" id="loadItinerary" class="itinerary-load-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4"></path><path d="M5 15v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4"></path></svg>Load Itinerary</button><button type="button" id="addItinerary" class="itinerary-add-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add Row</button></div></div>
           <div class="transaction-section-body">
             <div class="itinerary-table-wrap"><table class="itinerary-table"><thead><tr><th>Date</th><th>From</th><th>To</th><th>Depart</th><th>Arrival</th><th>Means</th><th>Transport</th><th>Per Diem</th><th>Others</th><th aria-label="Remove row"></th></tr></thead><tbody id="itinRows"></tbody></table></div>
             <div class="itinerary-summary"><div class="itinerary-total"><span class="itinerary-total-label">Calculated Total</span><strong class="itinerary-total-value">₱<span id="totalAmount">0.00</span></strong></div></div>
@@ -428,6 +428,6 @@
 <script src="config.js?v=20260813-1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
-<script src="PESO-San-Miguel-Attachment-System.js?v=20261013-3"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20261013-4"></script>
 </body>
 </html>
