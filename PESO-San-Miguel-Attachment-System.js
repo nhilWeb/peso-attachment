@@ -1820,28 +1820,4 @@ uiThemeToggle.addEventListener('click',()=>{
   updateUiThemeToggle();
 });
 updateUiThemeToggle();
-let applicationInitialized=false;
-function startApplication(){
-  if(applicationInitialized)return;
-  applicationInitialized=true;
-  initializeApplication();
-}
-document.getElementById('accessCodeForm').addEventListener('submit',event=>{
-  event.preventDefault();
-  const input=document.getElementById('accessCodeInput');
-  const error=document.getElementById('accessCodeError');
-  if(input.value!=='PESOtravel'){
-    error.hidden=false;
-    input.value='';
-    input.focus();
-    return;
-  }
-  try{sessionStorage.setItem('peso-access-granted-v1','true')}catch{}
-  document.documentElement.classList.remove('access-locked');
-  error.hidden=true;
-  startApplication();
-});
-if(document.documentElement.classList.contains('access-locked')){
-  document.getElementById('accessCodeInput').focus();
-}
-startApplication();
+initializeApplication();

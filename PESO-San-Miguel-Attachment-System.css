@@ -919,25 +919,6 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
     .app-dashboard-actions .dashboard-new-btn{width:100%}
   }
 
-  html.access-locked,html.access-locked body{min-height:100%;background:#f8f9fa}
-  html.access-locked body{overflow:hidden}
-  html.access-locked body>:not(#accessCodeModal){filter:blur(7px);pointer-events:none;user-select:none}
-  html.access-locked #accessCodeModal{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:20px;background:rgba(248,249,250,.26);backdrop-filter:blur(1px);visibility:visible}
-  html:not(.access-locked) #accessCodeModal{display:none}
-  .access-code-card{box-sizing:border-box;width:min(420px,100%);padding:30px;border:1px solid #dee2e6;border-radius:10px;background:#fff;box-shadow:0 12px 36px rgba(33,37,41,.12);text-align:center}
-  .access-code-icon{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:10px;background:#e7f1ff;color:#0d6efd}
-  .access-code-icon svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-  .access-code-card h1{color:#212529;font-size:22px;font-weight:600}
-  .access-code-card>p{margin:7px 0 20px;color:#6c757d;font-size:14px}
-  .access-code-card form{text-align:left}
-  .access-code-card label{display:block;margin-bottom:6px;color:#212529;font-size:14px;font-weight:500}
-  .access-code-card input{box-sizing:border-box;width:100%;min-height:42px;padding:9px 12px;border:1px solid #ced4da;border-radius:6px;background:#fff;color:#212529;font:inherit}
-  .access-code-card input:focus{border-color:#86b7fe;outline:0;box-shadow:0 0 0 3px rgba(13,110,253,.2)}
-  .access-code-error{margin:8px 0 0;color:#dc3545;font-size:13px}
-  .access-code-submit{width:100%;min-height:42px;margin-top:14px;border:1px solid #0d6efd;border-radius:6px;background:#0d6efd;color:#fff;font:inherit;font-weight:600;cursor:pointer}
-  .access-code-submit:hover{border-color:#0a58ca;background:#0b5ed7}
-  .access-code-submit:focus-visible{outline:0;box-shadow:0 0 0 3px rgba(13,110,253,.25)}
-
   .itinerary-date-row{min-width:0}
   .itinerary-date-row .date-range-input{min-width:0;flex:1}
   .itinerary-drag-handle{display:inline-flex;align-items:center;justify-content:center;width:27px;height:32px;flex:0 0 27px;padding:0;border:1px solid #dee2e6;border-radius:5px;background:#f8f9fa;color:#6c757d;cursor:grab;touch-action:none}
