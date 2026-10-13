@@ -6,7 +6,7 @@ const VIEW_STATE_KEY='sm_live_view_state_v1', LOGOS_KEY='sm_template_logos_enabl
 const APP_VIEWS=['dashboard','form','preview','settings'];
 const TEMPLATE_KEYS=['or','dv','to','itinerary','rer'];
 let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, dashboardSearchQuery='', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
-const DASHBOARD_PAGE_SIZE=10;
+const DASHBOARD_PAGE_SIZE=5;
 let transactions=[],systemSettings=null,remoteReady=false,apiStatusTimer=null;
 const API_CONFIG=window.PESO_CONFIG||{};
 let itinerary=[
