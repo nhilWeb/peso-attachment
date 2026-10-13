@@ -1,4 +1,4 @@
-# PESO Attachment System deployment
+# PESO San Miguel Travel Attachment System deployment
 
 This version stores transaction field values in Google Sheets. It does not upload generated PDF or Excel files to Google Drive. Printing, PDF saving, and Excel export remain browser-only operations.
 

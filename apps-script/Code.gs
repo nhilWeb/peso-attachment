@@ -1,5 +1,5 @@
 /**
- * PESO San Miguel Attachment System - Google Sheets data service.
+ * PESO San Miguel Travel Attachment System - Google Sheets data service.
  *
  * Required Script Properties:
  *   SPREADSHEET_ID  ID of the Google Spreadsheet used as the database

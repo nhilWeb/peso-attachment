@@ -18,11 +18,11 @@ if not exist "%APP_ICON%" (
   exit /b 1
 )
 
-powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$shell = New-Object -ComObject WScript.Shell; $shortcutPath = Join-Path ([Environment]::GetFolderPath('Desktop')) 'PESO San Miguel Attachment System.lnk'; $shortcut = $shell.CreateShortcut($shortcutPath); $shortcut.TargetPath = '%APP_HTML%'; $shortcut.WorkingDirectory = '%APP_DIR%'; $shortcut.IconLocation = '%APP_ICON%,0'; $shortcut.Description = 'PESO San Miguel Attachment System'; $shortcut.Save()"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "$shell = New-Object -ComObject WScript.Shell; $shortcutPath = Join-Path ([Environment]::GetFolderPath('Desktop')) 'PESO San Miguel Travel Attachment System.lnk'; $shortcut = $shell.CreateShortcut($shortcutPath); $shortcut.TargetPath = '%APP_HTML%'; $shortcut.WorkingDirectory = '%APP_DIR%'; $shortcut.IconLocation = '%APP_ICON%,0'; $shortcut.Description = 'PESO San Miguel Travel Attachment System'; $shortcut.Save()"
 
 if errorlevel 1 (
   echo The Desktop shortcut could not be created.
 ) else (
-  echo PESO San Miguel Attachment System shortcut created on the Desktop.
+  echo PESO San Miguel Travel Attachment System shortcut created on the Desktop.
 )
 pause

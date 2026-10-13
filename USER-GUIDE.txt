@@ -1,4 +1,4 @@
-PESO SAN MIGUEL ATTACHMENT SYSTEM
+PESO SAN MIGUEL TRAVEL ATTACHMENT SYSTEM
 Quick User Guide
 
 FILES
@@ -21,7 +21,7 @@ PESO LOGO ICON
 - The PESO logo appears on the browser tab when the system is open.
 - Windows uses the Chrome or Edge icon for all individual .html files, so the HTML file itself may still show the browser icon in File Explorer.
 - To get a PESO-logo icon on the Desktop, double-click Create PESO Desktop Shortcut.bat once.
-- A shortcut named PESO San Miguel Attachment System will be created on the Desktop.
+- A shortcut named PESO San Miguel Travel Attachment System will be created on the Desktop.
 - Keep all files together in the same extracted folder. You may use the Desktop shortcut afterward.
 
 IMPORTANT STORAGE INFORMATION
