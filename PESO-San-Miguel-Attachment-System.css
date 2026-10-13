@@ -921,8 +921,8 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
 
   html.access-locked,html.access-locked body{min-height:100%;background:#f8f9fa}
   html.access-locked body{overflow:hidden}
-  html.access-locked body>:not(#accessCodeModal){visibility:hidden!important}
-  html.access-locked #accessCodeModal{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:20px;background:#f8f9fa;visibility:visible}
+  html.access-locked body>:not(#accessCodeModal){filter:blur(7px);pointer-events:none;user-select:none}
+  html.access-locked #accessCodeModal{position:fixed;inset:0;z-index:3000;display:grid;place-items:center;padding:20px;background:rgba(248,249,250,.26);backdrop-filter:blur(1px);visibility:visible}
   html:not(.access-locked) #accessCodeModal{display:none}
   .access-code-card{box-sizing:border-box;width:min(420px,100%);padding:30px;border:1px solid #dee2e6;border-radius:10px;background:#fff;box-shadow:0 12px 36px rgba(33,37,41,.12);text-align:center}
   .access-code-icon{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:10px;background:#e7f1ff;color:#0d6efd}

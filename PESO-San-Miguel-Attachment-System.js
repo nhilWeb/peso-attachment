@@ -1803,6 +1803,5 @@ document.getElementById('accessCodeForm').addEventListener('submit',event=>{
 });
 if(document.documentElement.classList.contains('access-locked')){
   document.getElementById('accessCodeInput').focus();
-}else{
-  startApplication();
 }
+startApplication();
