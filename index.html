@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script>try{if(localStorage.getItem('peso-ui-theme')==='classic')document.documentElement.classList.add('classic-ui')}catch{}</script>
-<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261013-7">
+<script>try{if(localStorage.getItem('peso-ui-theme')==='classic')document.documentElement.classList.add('classic-ui');if(localStorage.getItem('peso-dark-mode')==='true')document.documentElement.classList.add('dark-mode')}catch{}</script>
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261013-8">
 </head>
 <body class="bg-slate-100 text-slate-900">
 <header class="app-header no-print">
@@ -26,6 +26,7 @@
     <div class="app-dashboard-actions no-print">
       <div class="dashboard-date-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg><span id="dashboardDate"></span></div>
       <button id="dashNew" class="dashboard-new-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New Transaction</button>
+      <button id="darkModeToggle" class="dark-mode-toggle" type="button" aria-pressed="false" aria-label="Enable dark mode" title="Toggle dark mode"><svg class="dark-mode-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"></path></svg><span class="dark-mode-label">Dark</span><span class="dark-mode-switch" aria-hidden="true"><span></span></span></button>
     </div>
     <nav class="app-nav" aria-label="Primary navigation">
       <button class="navBtn app-nav-btn active" data-view="dashboard" title="Dashboard" aria-label="Dashboard" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg></button>
@@ -415,6 +416,6 @@
 <script src="config.js?v=20260813-1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
-<script src="PESO-San-Miguel-Attachment-System.js?v=20261013-6"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20261013-7"></script>
 </body>
 </html>

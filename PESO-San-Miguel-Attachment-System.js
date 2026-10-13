@@ -1820,4 +1820,17 @@ uiThemeToggle.addEventListener('click',()=>{
   updateUiThemeToggle();
 });
 updateUiThemeToggle();
+const darkModeToggle=document.getElementById('darkModeToggle');
+function updateDarkModeToggle(){
+  const enabled=document.documentElement.classList.contains('dark-mode');
+  darkModeToggle.setAttribute('aria-pressed',String(enabled));
+  darkModeToggle.setAttribute('aria-label',enabled?'Disable dark mode':'Enable dark mode');
+  darkModeToggle.querySelector('.dark-mode-label').textContent=enabled?'Light':'Dark';
+}
+darkModeToggle.addEventListener('click',()=>{
+  const enabled=document.documentElement.classList.toggle('dark-mode');
+  try{localStorage.setItem('peso-dark-mode',String(enabled))}catch{}
+  updateDarkModeToggle();
+});
+updateDarkModeToggle();
 initializeApplication();
