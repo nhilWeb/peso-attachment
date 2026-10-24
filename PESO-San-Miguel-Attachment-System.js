@@ -1665,7 +1665,12 @@ document.getElementById('generateReportAi').addEventListener('click',async()=>{
     activeReportAiDraft={transactionId:activeTx.id,report};
     activeTpl='postTravelReport';renderPreview();
     showApiStatus('AI report draft generated. Review every statement before printing.','success',5000);
-  }catch(error){showApiStatus(error.message,'error',5000)}
+  }catch(error){
+    const message=error.message==='API route not found.'
+      ?'The AI route is not deployed yet. Deploy the updated Cloudflare Worker and enable Cloudflare Access (REQUIRE_ACCESS=true). The printable report is still available.'
+      :error.message;
+    showApiStatus(message,'error',9000);
+  }
   finally{button.disabled=false;button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8 2.2L5 10l5.2-1.8L12 3Z"></path></svg>Generate with AI'}
 });
 
