@@ -54,14 +54,6 @@ Apps Script needs Spreadsheet permission only. No Google Drive storage or Drive 
 
 The Worker validates the Access JWT itself. A forged email header is not accepted.
 
-### AI-generated Post Travel Reports
-
-The Post Travel Report template is assembled in the browser from each transaction and can be printed or saved to PDF. **Generate with AI** sends the trip fields and itinerary to Cloudflare Workers AI through the Worker; do not include sensitive details that are not needed for the report. AI output is a draft and must be checked before signing or submission. The app still creates a printable report when AI is unavailable.
-
-Workers AI currently includes a free daily allocation of 10,000 Neurons. Usage above that allocation requires a paid Workers plan and is billed; the free-plan limit can also cause generation to fail after the daily allocation is used. See [Cloudflare Workers AI pricing](https://developers.cloudflare.com/workers-ai/platform/pricing/).
-
-To enable generation, retain the `[ai]` binding in `cloudflare-worker/wrangler.toml`, make sure `REQUIRE_ACCESS = "true"`, and deploy the Worker. In Cloudflare Zero Trust, protect the Worker API hostname with the approved PESO user/group policy. The AI route intentionally refuses requests when Cloudflare Access authentication is disabled. No AI API key is stored in the browser or repository.
-
 ### Optional rate limiting
 
 Create a Cloudflare Workers rate-limiter namespace, then uncomment the `[[ratelimits]]` block in `wrangler.toml`. The code automatically uses the binding when it exists and limits by authenticated user rather than shared office IP address.
