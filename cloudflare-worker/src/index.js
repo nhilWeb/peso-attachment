@@ -26,7 +26,13 @@ export default {
       const transactionMatch = url.pathname.match(/^\/api\/transactions\/([^/]+)$/);
       let backendRequest;
 
-      if (request.method === 'GET' && url.pathname === '/api/health') {
+      if (request.method === 'POST' && url.pathname === '/api/post-travel-report/generate') {
+        if (!isAccessRequired(env)) throw httpError(403, 'AI report generation requires Cloudflare Access authentication.');
+        if (!env.AI) throw httpError(503, 'AI report generation is not enabled. Configure the Workers AI binding first.');
+        const transaction = await readJsonBody(request);
+        const report = await generatePostTravelReport(transaction, env);
+        return json({ok: true, data: {report}}, 200, cors);
+      } else if (request.method === 'GET' && url.pathname === '/api/health') {
         backendRequest = {action: 'health'};
       } else if (request.method === 'GET' && url.pathname === '/api/bootstrap') {
         backendRequest = {action: 'getBootstrap'};
@@ -55,6 +61,44 @@ export default {
     }
   }
 };
+
+async function generatePostTravelReport(transaction, env) {
+  const safe = {
+    personnel: textField(transaction.personnel || transaction.payee, 200),
+    position: textField(transaction.position, 200),
+    office: textField(transaction.office, 200),
+    travelFrom: textField(transaction.travelFrom, 100),
+    travelTo: textField(transaction.travelTo, 100),
+    destination: textField(transaction.destination, 500),
+    purpose: textField(transaction.purpose, 1000),
+    itinerary: Array.isArray(transaction.itinerary) ? transaction.itinerary.slice(0, 30).map(row => ({
+      date: textField(row && row.dateRange, 100),
+      from: textField(row && row.from, 200),
+      to: textField(row && row.to, 200),
+      means: textField(row && row.means, 80)
+    })) : []
+  };
+  const prompt = `Draft a concise Philippine local-government post-travel report using only the verified facts in the JSON below. Never invent specific events, people, dates, approvals, certificates, outputs, or attachments. If the facts do not support a detail, use an empty string for that section. Return only valid JSON with these string keys: summary, activities, accomplishments, issues, recommendations, attachments. Activities and accomplishments may be cautious general statements directly supported by the stated purpose; use bullet lines separated by newline. If no verified issue or attachment is stated, leave it blank. Recommendations may say to share and apply the knowledge gained when the purpose indicates a training, meeting, or conference. Do not repeat private information beyond the report fields.\n\nVerified transaction data:\n${JSON.stringify(safe)}`;
+  const result = await env.AI.run('@cf/meta/llama-3.1-8b-instruct-fp8', {
+    messages: [
+      {role: 'system', content: 'You draft factual administrative reports. Follow the requested JSON format and do not invent facts.'},
+      {role: 'user', content: prompt}
+    ],
+    max_tokens: 900,
+    temperature: 0.2
+  });
+  const output = typeof result?.response === 'string' ? result.response : '';
+  const jsonText = output.match(/\{[\s\S]*\}/)?.[0];
+  if (!jsonText) throw httpError(502, 'The AI service returned an incomplete report. Please try again.');
+  let parsed;
+  try { parsed = JSON.parse(jsonText); } catch { throw httpError(502, 'The AI service returned an unreadable report. Please try again.'); }
+  const fields = ['summary', 'activities', 'accomplishments', 'issues', 'recommendations', 'attachments'];
+  return Object.fromEntries(fields.map(field => [field, textField(parsed[field], 2500)]));
+}
+
+function textField(value, maxLength) {
+  return String(value == null ? '' : value).replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, maxLength);
+}
 
 function requireConfiguration(env) {
   const required = ['APPS_SCRIPT_URL', 'GATEWAY_SECRET', 'ALLOWED_ORIGIN'];

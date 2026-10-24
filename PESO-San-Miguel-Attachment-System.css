@@ -9,6 +9,19 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
   .card{background:#fff;border:1px solid #e2e8f0;border-radius:.75rem;box-shadow:0 1px 2px rgba(0,0,0,.05)}
   .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:.5rem;padding:.55rem .85rem;font-size:.875rem;font-weight:700;cursor:pointer}
   .paper{background:#fff;color:#000;margin:0 auto 2rem;box-shadow:0 8px 28px rgba(15,23,42,.15)}
+  #printArea .post-travel-report{box-sizing:border-box;width:190mm;min-height:260mm;padding:12mm 15mm;font:12pt/1.45 'Times New Roman',Times,serif;color:#111}
+  .post-report-header{text-align:center;margin-bottom:8mm}
+  .post-report-office{font-size:10pt;line-height:1.3}
+  .post-report-header h1{font-size:15pt;font-weight:700;letter-spacing:.04em;margin-top:5mm}
+  .post-report-meta{width:100%;border-collapse:collapse;margin:0 0 6mm;font-size:10.5pt}
+  .post-report-meta th,.post-report-meta td{border:1px solid #555;padding:2mm;vertical-align:top;text-align:left}
+  .post-report-meta th{width:34%;font-weight:700}
+  #printArea .post-travel-report h2{font:700 11pt 'Times New Roman',Times,serif;margin:4mm 0 1mm;break-after:avoid-page;page-break-after:avoid}
+  #printArea .post-travel-report p{font:11pt/1.45 'Times New Roman',Times,serif;text-align:justify;white-space:normal;margin:0 0 2mm;overflow-wrap:anywhere}
+  .post-report-signature{margin:12mm 0 0 54%;display:flex;flex-direction:column;gap:1mm;font-size:11pt}
+  .post-report-signature strong{margin-top:10mm;text-decoration:underline;text-transform:uppercase}
+  .post-report-signature span{font-size:10pt}
+  .report-ai-note{margin-top:8px;color:#64748b;font-size:10px;line-height:1.45}
   .doc-table{width:100%;border-collapse:collapse;table-layout:fixed}
   .doc-table td,.doc-table th{border:1px solid #111;padding:2px 4px;vertical-align:middle}
   .dv-paper{box-sizing:border-box;border-bottom:1px solid #111}
@@ -23,6 +36,8 @@ body{font-family:'Poppins',Arial,Helvetica,sans-serif}
     .no-print{display:none!important}.paper{margin:0 auto!important;box-shadow:none!important;max-width:100%!important;break-inside:avoid;page-break-inside:avoid}
     /* The itinerary grows only as far as its entered content requires. */
     #printArea .itinerary-paper{width:190mm!important;height:auto!important;min-height:0!important;overflow:visible!important;break-inside:auto;page-break-inside:auto}
+    #printArea .post-travel-report{width:190mm!important;min-height:0!important;margin:0 auto!important;padding:0!important;box-shadow:none!important;break-inside:auto;page-break-inside:auto}
+    #printArea .post-report-meta tr,#printArea .post-travel-report h2,#printArea .post-report-signature{break-inside:avoid;page-break-inside:avoid}
     #printArea .itinerary-paper tr{break-inside:avoid;page-break-inside:avoid}
     @page{size:A4 portrait;margin:.7in 7mm 7mm}
     @page rer{size:A4 portrait;margin:15mm 1in}

@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script>try{if(localStorage.getItem('peso-ui-theme')==='classic')document.documentElement.classList.add('classic-ui');if(localStorage.getItem('peso-dark-mode')==='true')document.documentElement.classList.add('dark-mode')}catch{}</script>
-<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261013-9">
+<link rel="stylesheet" href="PESO-San-Miguel-Attachment-System.css?v=20261024-1">
 </head>
 <body class="bg-slate-100 text-slate-900">
 <header class="app-header no-print">
@@ -199,7 +199,7 @@
       <div class="preview-workspace">
         <aside class="preview-template-sidebar no-print" aria-label="Attachment template selector">
           <div class="preview-template-wrap">
-            <div class="preview-template-label"><strong>Select Template</strong><span>5 available forms</span></div>
+            <div class="preview-template-label"><strong>Select Template</strong><span>6 available forms</span></div>
             <div class="template-status-legend" aria-hidden="true"><span class="incomplete"><b>×</b> Incomplete</span><span class="complete"><b>✓</b> Complete</span></div>
             <div class="preview-tabs" role="tablist" aria-label="Attachment templates">
               <div class="preview-template-item">
@@ -222,6 +222,7 @@
                 <button class="tplBtn preview-tab" data-tpl="rer" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h5"></path></svg>RER Receipts</button>
                 <div class="template-markers"><button type="button" class="template-mark-btn incomplete" data-tpl="rer" data-mark="incomplete" title="Mark RER incomplete" aria-label="Mark RER incomplete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg></button><button type="button" class="template-mark-btn complete" data-tpl="rer" data-mark="complete" title="Mark RER complete" aria-label="Mark RER complete"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></button></div>
               </div>
+              <div class="preview-template-item"><button class="tplBtn preview-tab" data-tpl="postTravelReport" role="tab" aria-selected="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM8 7h8M8 11h8M8 15h8M8 19h5"></path></svg>Post Travel Report</button></div>
             </div>
           </div>
 
@@ -239,6 +240,8 @@
             </div>
             <div class="preview-actions">
               <button id="editCurrent" class="preview-edit-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path></svg>Edit Details</button>
+              <button id="generateReportAi" class="preview-edit-btn report-ai-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"></path><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"></path></svg>Generate with AI</button>
+              <div id="reportAiNote" class="report-ai-note" hidden>AI generation sends this transaction’s personnel and trip details to Cloudflare Workers AI. Verify the draft before signing.</div>
               <button id="printBtn" class="preview-print-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6Z"></path></svg>Print / Save PDF</button>
               </div>
             </div>
@@ -416,6 +419,6 @@
 <script src="config.js?v=20260813-1"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/4.2.1/jspdf.umd.min.js"></script>
-<script src="PESO-San-Miguel-Attachment-System.js?v=20261013-7"></script>
+<script src="PESO-San-Miguel-Attachment-System.js?v=20261024-1"></script>
 </body>
 </html>

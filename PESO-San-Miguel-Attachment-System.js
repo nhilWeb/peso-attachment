@@ -5,7 +5,7 @@ const BAGONG_PILIPINAS_LOGO_URI='Bagong_Pilipinas_logo.png';
 const VIEW_STATE_KEY='sm_live_view_state_v1', LOGOS_KEY='sm_template_logos_enabled_v1';
 const APP_VIEWS=['dashboard','form','preview','settings'];
 const TEMPLATE_KEYS=['or','dv','to','itinerary','rer'];
-let editingId=null, activeTx=null, activeTpl='or', pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, dashboardSearchQuery='', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
+let editingId=null, activeTx=null, activeTpl='or', activeReportAiDraft=null, pendingConfirmation=null, settingsSaveTimer=null, dashboardTab='recent', dashboardTypeTab='all', dashboardPage=1, dashboardSearchQuery='', noteTransaction=null, noteReminderIndex=0, noteReminderHideTimer=null;
 const DASHBOARD_PAGE_SIZE=5;
 let transactions=[],systemSettings=null,remoteReady=false,apiStatusTimer=null;
 const API_CONFIG=window.PESO_CONFIG||{};
@@ -1621,6 +1621,54 @@ function renderRER(t){
   return `<div class="rer-grid">${pairs.map(pair=>`<section class="rer-pair">${pair.map(renderReceipt).join('')}</section>`).join('')}</div>`;
 }
 
+function reportText(value, fallback=''){
+  const text=String(value||'').trim();
+  return text?esc(text).replace(/\r?\n/g,'<br>'):fallback;
+}
+
+function renderPostTravelReport(t){
+  const ai=activeReportAiDraft?.transactionId===t.id?activeReportAiDraft.report:null;
+  const name=t.payee||'[Personnel name]';
+  const range=travelDateRange(t)||'[Travel dates]';
+  const destination=t.destination||'[Destination]';
+  const purpose=t.purpose||'[Purpose of travel]';
+  const summary=ai?.summary||`The undersigned traveled to ${destination} from ${range} for the purpose of ${purpose}.`;
+  const itinerary=(Array.isArray(t.itinerary)?t.itinerary:[]).filter(row=>row.from||row.to).map(row=>[row.dateRange,[row.from,row.to].filter(Boolean).join(' to ')].filter(Boolean).join(' — '));
+  const defaultActivities=itinerary.length?itinerary.map(item=>`• Travel itinerary recorded: ${item}`).join('\n'):'[Enter the activities actually undertaken during the official travel.]';
+  const defaultAccomplishments='[Enter the verified accomplishments, outputs, or knowledge gained.]';
+  const defaultIssues='[State any issues encountered, or indicate “None” if applicable.]';
+  const defaultRecommendations='[Enter recommendations based on the actual outcomes of the travel.]';
+  const section=(title,content,fallback)=>`<h2>${title}</h2><p>${reportText(content,fallback)}</p>`;
+  return `<article class="paper post-travel-report">
+    <header class="post-report-header"><div class="post-report-office">Republic of the Philippines<br>Province of Surigao del Sur<br>Municipality of San Miguel<br><strong>PUBLIC EMPLOYMENT SERVICE OFFICE</strong></div><h1>POST-TRAVEL REPORT</h1></header>
+    <table class="post-report-meta"><tbody>
+      <tr><th>Name of Personnel</th><td>${esc(name)}</td></tr><tr><th>Position / Office</th><td>${esc([t.position,t.office].filter(Boolean).join(' / ')||'[Position / Office]')}</td></tr>
+      <tr><th>Date(s) of Travel</th><td>${esc(range)}</td></tr><tr><th>Destination</th><td>${esc(destination)}</td></tr><tr><th>Purpose of Travel</th><td>${esc(purpose)}</td></tr>
+      <tr><th>Reference Document</th><td>Travel Order No. ____________________</td></tr><tr><th>Date Approved</th><td>____________________</td></tr>
+    </tbody></table>
+    ${section('I. SUMMARY OF TRAVEL',summary,'[Complete after reviewing the travel details.]')}
+    ${section('II. ACTIVITIES UNDERTAKEN',ai?.activities,defaultActivities)}
+    ${section('III. ACCOMPLISHMENTS / OUTPUTS',ai?.accomplishments,defaultAccomplishments)}
+    ${section('IV. ISSUES AND CONCERNS (if any)',ai?.issues,defaultIssues)}
+    ${section('V. RECOMMENDATIONS',ai?.recommendations,defaultRecommendations)}
+    ${section('VI. ATTACHMENTS',ai?.attachments,'[List the supporting documents attached to this report.]')}
+    <footer class="post-report-signature"><div>Submitted by:</div><strong>${esc(name)}</strong><span>${esc(t.position||'Position')}</span></footer>
+  </article>`;
+}
+
+document.getElementById('generateReportAi').addEventListener('click',async()=>{
+  if(!activeTx)return;
+  const button=document.getElementById('generateReportAi');
+  button.disabled=true;button.textContent='Generating…';
+  try{
+    const report=await apiRequest('/post-travel-report/generate',{method:'POST',body:activeTx});
+    activeReportAiDraft={transactionId:activeTx.id,report};
+    activeTpl='postTravelReport';renderPreview();
+    showApiStatus('AI report draft generated. Review every statement before printing.','success',5000);
+  }catch(error){showApiStatus(error.message,'error',5000)}
+  finally{button.disabled=false;button.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8 2.2L5 10l5.2-1.8L12 3Z"></path></svg>Generate with AI'}
+});
+
 let previewDocumentFitFrame=0;
 function fitPreviewDocument(){
   const printArea=document.getElementById('printArea');
@@ -1647,9 +1695,12 @@ function renderPreview(){
   activeTx.templateCompletion=normalizedTemplateCompletion(activeTx);
   activeTx.status=statusFromTemplateCompletion(activeTx.templateCompletion);
   const s=getSettings();
-  const map={or:renderOR,dv:renderDV,to:renderTO,itinerary:renderItin,rer:renderRER};
-  const labels={or:'Obligation Request',dv:'Disbursement Voucher',to:'Travel Order',itinerary:'Itinerary of Travel',rer:'Reimbursement Expense Receipt'};
+  const map={or:renderOR,dv:renderDV,to:renderTO,itinerary:renderItin,rer:renderRER,postTravelReport:renderPostTravelReport};
+  const labels={or:'Obligation Request',dv:'Disbursement Voucher',to:'Travel Order',itinerary:'Itinerary of Travel',rer:'Reimbursement Expense Receipt',postTravelReport:'Post Travel Report'};
   document.getElementById('printArea').innerHTML=map[activeTpl](activeTx,s);
+  const canGenerateTravelReport=activeTpl==='postTravelReport'&&/travel/i.test(activeTx.type||'');
+  document.getElementById('generateReportAi').hidden=!canGenerateTravelReport;
+  document.getElementById('reportAiNote').hidden=!canGenerateTravelReport;
   applyTemplateLogoVisibility();
   document.getElementById('previewTemplateTitle').textContent=labels[activeTpl];
   document.getElementById('previewPayee').textContent=activeTx.payee||'Unnamed Payee';
@@ -1742,7 +1793,7 @@ async function restoreViewState(){
 
   if(state.view==='preview'){
     activeTx=state.activeTx||null;
-    activeTpl=TEMPLATE_KEYS.includes(state.activeTpl)?state.activeTpl:'or';
+    activeTpl=TEMPLATE_KEYS.includes(state.activeTpl)||state.activeTpl==='postTravelReport'?state.activeTpl:'or';
     if(!activeTx){
       showView('dashboard');
       return;

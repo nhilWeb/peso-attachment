@@ -9,6 +9,9 @@ REQUIRE_ACCESS = "false"
 ACCESS_TEAM_DOMAIN = "peso-sanmiguel.cloudflareaccess.com"
 ACCESS_AUD = "2859d0d3759fbf3832cdca8b8aa66cb8e9c368df09e17e15d84fbf43a3f9438a"
 
+[ai]
+binding = "AI"
+
 # Configure these encrypted values before deployment:
 #   npx wrangler secret put APPS_SCRIPT_URL
 #   npx wrangler secret put GATEWAY_SECRET
